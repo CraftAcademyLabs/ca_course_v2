@@ -18,6 +18,7 @@ This command will run a configuration script and add a bunch of example tests th
 
 **Step3:** Let's also configure a default URL for Cypress to use, so we don't have to specify this in our tests:  
 Inside ```cypress.json```, add the following line to the empty object:  
+
 ```"baseUrl": "http://locahost:3001"```  
 
 **Step 4:** Configuring the scripts and the server.  

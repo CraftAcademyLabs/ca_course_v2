@@ -89,6 +89,10 @@ Working on this is also a good opportunity to practice SoC (separation of concer
 So, instead of writing the list inside of our ```App.js``` component, let's extract the functionality to a separate component.  
 Create a new folder inside ```src``` and call it ```components```. Inside this folder, we create the new component ```EmployeeList.jsx```
 
+Before we get cracking, let's import the component inside ```App.js``` and render it inside the ```return``` block
+
+**imgage: building_a_list_04_3**
+
 Inside of ```EmployeeList``` we create a class component and store the employee details in its state.
 The agency has provided us with a sample list for test purposes:
 ```

@@ -12,7 +12,8 @@ In our case, we want to retrieve some data, which we in turn will render in our 
 
 **A ```get``` request! Bingo!**
 
-To help us in this endeavour, we are going to use a tool called **Axios**. Axios is a library for making asynchronous network requests. It is designed to handle http requests and responses and has become an industry standard. 
+To help us in this endeavour, we are going to use a tool called **Axios**. Axios is a library for making asynchronous network requests. It is designed to handle http requests and responses and has become an industry standard.  
+We will use the [reqres](https://reqres.in/) API in this scenario, which is a simple API for front-end testing that provides fake 'life-like' data.
 
 We will start by adding this tool to our dependencies and then importing it in our ```EmployeeList``` component!   
 ```$ yarn add axios```  
@@ -28,7 +29,7 @@ Since Axios isn't evaluated instantly (since it takes just a fraction of a secon
 
 To accomplish this, we use the ```async...await``` functionality, making the function ```asynchronous``` and allowing us to ```await``` the axios call.
 
-Inside the function, we store the data retrieved from the ```axios.get()``` call into the variable ```employees```.  
+Inside the function, we store the data retrieved from the ```axios.get()``` API call to **reqres** into the variable ```employees```.  
 
 We then dig into this variable (which evidently has turned out to contain an object, ```data```, that contains another object, ```data```, which then holds an array of employee objects), and store this array in our ```employees``` state.
 

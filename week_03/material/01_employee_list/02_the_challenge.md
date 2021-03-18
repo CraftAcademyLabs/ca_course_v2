@@ -2,10 +2,12 @@
 An agency has been seeing good growth and would like to expand their business and bump up their employee numbers. They have asked us to help them create a simple employee management system. They would like to have all employees displayed in a list with the possibility to view additional information about each individual. 
 
 We have drawn up the following lo-fi to guide us:  
+
 **image: *the_challenge_01***
 
 As mentioned, the agency would like to be able to view additional information about their employees. We will solve this by adding a **trigger** effect to the View button which will display a modal (a pop-up) with the specified employee's details when clicked. 
 Further down the line, the agency would also like to be able to *update* the details or *delete* the employee completely, but for now, let's focus on *getting* the information.  
+
 **image: *the_challenge_02***
 
 ## Learning objectives
