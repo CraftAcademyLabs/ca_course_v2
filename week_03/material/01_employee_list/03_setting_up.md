@@ -6,7 +6,7 @@ Let's start scaffolding the application with React's own app generator ```create
 
 ```$ yarn create react-app employee_management```
 
-**Now, let's clean up our application, commit the changes when satisfied, and move on to setting up our testing framework**
+**Now, let's clean up the application, commit the changes when satisfied, and move on to setting up our testing framework**
 
 ## Cypress
 **Step 1:** Install cypress and save it as a development dependency:  
@@ -17,12 +17,13 @@ Let's start scaffolding the application with React's own app generator ```create
 This command will run a configuration script and add a bunch of example tests that can be a reference for you, and help you to get to know the various Cypress commands.  
 
 **Step3:** Let's also configure a default URL for Cypress to use, so we don't have to specify this in our tests:  
-Inside ```cypress.json```, add the following line to the empty object:
-```"baseUrl": "http://locahost:3000"```  
+Inside ```cypress.json```, add the following line to the empty object:  
+```"baseUrl": "http://locahost:3001"```  
 
 **Step 4:** Configuring the scripts and the server.  
 There's a myriad of ways to set up our local server. We have found the ```start-server-and-test``` helper package to be a convenient solution, so let's add that to our development dependencies:  
 ```$ yarn add -D start-server-and-test```  
+
 Now, we need to go to our ```package.json``` and add the following lines to our ```scripts``` section: 
 ```
 "start:silent": "PORT=3001 BROWSER=none react-scripts start",

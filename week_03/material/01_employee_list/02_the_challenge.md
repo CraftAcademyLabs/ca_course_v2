@@ -12,7 +12,7 @@ Further down the line, the agency would also like to be able to *update* the det
 During this exercise you will get acquainted with the HTTP verbs. You will create and modify your own request-response scenarios, where you will send requests to an external API and in turn use the API's response to display dynamic data in your app.  
 As always, we will solve our tasks in a test-driven manner with a good Git flow. :metal:
   
-- Visualizing dynamic data with React
+- Visualizing dynamic data
 - Basic knowledge of RESTful APIs
 - Sending API requests with Axios
 - Practising the HTTP verbs and working with params
