@@ -22,7 +22,7 @@ We will start by adding this tool to our dependencies and then importing it in o
 Next, we remove our hard-coded data from the ```employees``` state, leaving it an empty array.   
 Then we start building the function that will send the requests and handle the responses. Let's call it ```getEmployees()```:
 
-**image: building_a_list_07**
+**image: sending_a_request_01**
 
 Since Axios isn't evaluated instantly (since it takes just a fraction of a second to make this request), we want to halt the flow of the function until the response has been completely received.  
 
@@ -43,6 +43,6 @@ This is a great opportunity to get to know the life cycle of components a bit be
 
 The ```componentDidMount()``` method is invoked immediately upon mounting, triggering everything inside of its block, which is exactly what we're looking for! Let's pop it in:
 
-**image: building_a_list_08**
+**image: sending_a_request_02**
 
 **Let's go and marvel at our now green tests... Add, commit! Well done.**

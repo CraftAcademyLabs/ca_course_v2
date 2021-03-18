@@ -19,9 +19,29 @@ import App from './App';
 And now, we're ready to get stylin'!
 
 ## Working with Semantic UI
+Let's start with something simple, like a [Container](https://react.semantic-ui.com/elements/container/)   and a [Header](https://react.semantic-ui.com/elements/header/)  .  
 
+In our ```App.js```, we ```import { Container, Header } from 'semantic-ui-react'``` and swap these components with our ```div``` and ```h1```, like so:
 
+**image: adding_style_01**
 
-[Container](https://react.semantic-ui.com/elements/container/)  
-[Header](https://react.semantic-ui.com/elements/header/)  
-[Item](https://react.semantic-ui.com/views/item/)  
+The ```Container``` will add some margin to the layout, and the ```Header```, well, is appropriate for headers...  
+
+You may have noticed that we have given the ```Header``` a ```size="huge"``` property. This is a [shorthand prop](https://react.semantic-ui.com/shorthand-props) that comes with Semantic UI, and is a way for us to quickly and easily modify the design and functionality of Semantic's components. You will get used to these as you go on.  
+
+From hereon out it's all about experimenting. Design and CSS can be a tricky size in the beginning, but it all comes down to repetition and experimentation.
+
+## The Item component
+If you are feeling low on inspiration, we have added a solution below, using Semantic's [Item](https://react.semantic-ui.com/views/item/) component:
+
+**image: adding_style_02**
+
+Now, when we are done styling, we always run our test suite again, as it often happens that we accidentally meddle with functionality or reference attributes during styling. 
+
+Perhaps we have even added additional functionality, as in our case above that now also features an image. We should add this to our test:
+
+**image: adding_style_03**
+
+So, with all 4 tests going green, pad yourself on the back! You have successfully received data from an API, stored it in your component, and then used it to display information in a dynamic manner. Brilliant! 
+
+**Now it's time to crank up the complexity!**
