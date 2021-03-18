@@ -16,7 +16,7 @@ I would like to click a button and have the information displayed.
 
 Super! Let's hit the ground running with some Cypress testing 🤙
 
-Let's create a new test file ```displayEmployeeModal.feature.js``` and start cranking:
+Create a new test file ```displayEmployeeModal.feature.js``` and start cranking:
 
 
 **image: accessing_a_specific_employee_01**
