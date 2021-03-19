@@ -1,10 +1,11 @@
 ## Using a style library
-These days it's crucial not to neglect the UI, and while it can be good fun to build your own designs from scratch, this also proves to be extremely time consuming.  
+These days it's crucial not to neglect the UI, but, while it can be good fun to build your own designs from scratch, this also proves to be extremely time consuming.  
 
 Since time is the one thing we don't have in this boot camp, we choose to use pre-designed components. 
 Throughout the boot camp, we will be using [Semantic UI,](https://react.semantic-ui.com/) but there's plenty of other cool libraries and frameworks out there. 
 
 Well, let's get at it and install the dependencies:  
+
 ```$ yarn add semantic-ui-react semantic-ui-css```  
 
 Once installed, we need to import the css into our entry point (```index.js```):  
