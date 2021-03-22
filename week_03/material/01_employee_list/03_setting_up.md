@@ -1,7 +1,7 @@
 ## Configurations
 Before any coding can be done, we need to setup our environment.
 
-The agency has requested the app to be written with ReactJS, which is quite fortunate, since that's exactly you excell at.  
+The agency has requested the app to be written with ReactJS, which is quite fortunate, since that's exactly what you excel at.  
 Let's start scaffolding the application with React's own app generator ```create-react-app```. This tool saves us from a lot of time-consuming configuration, and comes with pre-configured dependencies such as Webpack and Babel. Instead, we can go straight at it and focus on our job - building functionality.
 
 ```$ yarn create react-app employee_management```
