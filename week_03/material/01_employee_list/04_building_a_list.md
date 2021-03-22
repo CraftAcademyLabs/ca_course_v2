@@ -68,7 +68,7 @@ Let's start with a new ```it``` block:
 
 So, what this test implies is that we expect a sort of container element with an ```id``` of ```employee-list```. We then look ```within``` this and look for elements with a ```class``` attribute of ```employee-item```. 
 
-Knowing that we want the list to contain 6 items of employee details, we expect the ```cy.get('.employee-item')``` to return an array of these 6 elements.  
+Knowing that we want the list to contain 6 items of employee details, we expect the ```cy.find('.employee-item')``` to return an array of these 6 elements.  
 This allows us to use the ```have.length``` matcher to count the elements in the array and expect it to equal 6. 
 
 We would also like to test that the list items do in fact contain the correct information. Let's do a sample test:
@@ -118,8 +118,8 @@ Instead we will use a simple, but powerful piece of functionality from JavaScrip
 
 You may remember this from your portfolio challenge, but if you still don't feel comfortable with it, I encourage you to go and read up on it, as it will be used extensively in your coding future. Check the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) for example.
 
-We will use the method to loop through our array of employee details and create a list element with the details for each iterated employee.   
-This way, it doesn't matter whether the employee detail array has 5 elements or 500, making our code dynamic!
+We will use the method to loop through our array of employee details and create a list element containing the details for each iterated employee.   
+This way, it doesn't matter whether the employee details array has 5 elements or 500, making our code dynamic!
 
 All these ```<li>``` elements are then stored in a variable, ```employeeList```, which we can then render inside of a ```<ul></ul>``` container, like:
 

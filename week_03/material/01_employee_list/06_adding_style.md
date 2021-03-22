@@ -1,5 +1,5 @@
 ## Using a style library
-These days it's crucial not to neglect the UI, but, while it can be good fun to build your own designs from scratch, this also proves to be extremely time consuming.  
+These days it's crucial not to neglect the UI, however, while it can be good fun to build your own designs from scratch, this also proves to be extremely time consuming.  
 
 Since time is the one thing we don't have in this boot camp, we choose to use pre-designed components. 
 Throughout the boot camp, we will be using [Semantic UI,](https://react.semantic-ui.com/) but there's plenty of other cool libraries and frameworks out there. 
@@ -33,7 +33,7 @@ You may have noticed that we have given the ```Header``` a ```size="huge"``` pro
 From hereon out it's all about experimenting. Design and CSS can be a tricky size in the beginning, but it all comes down to repetition and experimentation.
 
 ## The Item component
-If you are feeling low on inspiration, we have added a solution below, using Semantic's [Item](https://react.semantic-ui.com/views/item/) component:
+If you need a little inspiration, we have added a solution below, using Semantic's [Item](https://react.semantic-ui.com/views/item/) component:
 
 **image: adding_style_02**
 

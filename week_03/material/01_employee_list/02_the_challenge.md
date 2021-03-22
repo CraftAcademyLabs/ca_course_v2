@@ -1,5 +1,5 @@
 ## The problem statement
-An agency has been seeing good growth and would like to expand their business and bump up their employee numbers. They have asked us to help them create a simple employee management system. They would like to have all employees displayed in a list with the possibility to view additional information about each individual. 
+An agency has been seeing good growth lately and would like to expand their business and bump up their employee numbers. They have asked us to help them create a simple employee management system. They would like to have all employees displayed in a list with the possibility to view additional information about each individual. 
 
 We have drawn up the following lo-fi to guide us:  
 
@@ -12,7 +12,7 @@ Further down the line, the agency would also like to be able to **update** the d
 
 ## Learning objectives
 During this exercise you will get acquainted with the HTTP verbs. You will create and modify your own request-response scenarios, where you will send requests to an external API and in turn use the API's response to display dynamic data in your app.  
-As always, we will solve our tasks in a test-driven manner with a good Git flow. :metal:
+As always, we will solve our tasks in a test-driven manner with a good Git flow. 🤘
   
 - Visualizing dynamic data with React
 - Basic knowledge of RESTful APIs
