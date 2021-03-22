@@ -143,7 +143,7 @@ end
 ```  
 
 ## The ArticlePolicy
-```
+```ruby
 class ArticlePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
