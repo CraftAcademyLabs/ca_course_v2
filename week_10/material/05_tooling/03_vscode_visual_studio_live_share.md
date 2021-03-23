@@ -1,0 +1,5 @@
+Live Share enables your team to quickly collaborate on the same codebase without the need to synchronize code or to configure the same development tools, settings, or environment. 
+
+When you share a collaborative session, your teammate sees the context of the workspace in their editor. This means your teammate can read the code you shared without having to clone a repo or install any dependencies your code relies on. They can use rich language features to navigate within the code; not only just opening other files as text but using semantic analysis-based navigation like Go to Definition or Peek.
+
+When your teammate edits a file, they get editor enhancements like IntelliSense, statement completion, and suggestions. Each of you can open files, navigate, edit code, highlight, or refactor - and changes are instantly reflected. As you edit you can see your teammate’s cursor, jump to the location of your teammate’s carat, or follow their actions.
