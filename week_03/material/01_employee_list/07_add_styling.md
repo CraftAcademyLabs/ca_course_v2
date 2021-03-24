@@ -6,10 +6,12 @@ Throughout the boot camp, we will be using [Semantic UI,](https://react.semantic
 
 Well, let's get at it and install the dependencies:  
 
-```$ yarn add semantic-ui-react semantic-ui-css```  
-
-Once installed, we need to import the css into our entry point (```index.js```):  
 ```
+$ yarn add semantic-ui-react semantic-ui-css
+```  
+
+Once installed, we need to import the css into our entry point (`index.js`):  
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';  <---
@@ -22,13 +24,13 @@ And now, we're ready to get stylin'!
 ## Working with Semantic UI
 Let's start with something simple, like a [Container](https://react.semantic-ui.com/elements/container/)   and a [Header](https://react.semantic-ui.com/elements/header/)  .  
 
-In our ```App.js```, we ```import { Container, Header } from 'semantic-ui-react'``` and swap these components with our ```div``` and ```h1```, like so:
+In our `App.jsx`, we `import { Container, Header } from 'semantic-ui-react'` and swap these components with our `div` and `h1`, like so:
 
 **image: adding_style_01**
 
-The ```Container``` will add some margin to the layout, and the ```Header```, well, is appropriate for headers...  
+The `Container` will add some margin to the layout, and the `Header`, well, is appropriate for headers...  
 
-You may have noticed that we have given the ```Header``` a ```size="huge"``` property. This is a [shorthand prop](https://react.semantic-ui.com/shorthand-props) that comes with Semantic UI, and is a way for us to quickly and easily modify the design and functionality of Semantic's components. You will get used to these as you go on.  
+You may have noticed that we have given the `Header` a `size="huge"` property. This is a [shorthand prop](https://react.semantic-ui.com/shorthand-props) that comes with Semantic UI, and is a way for us to quickly and easily modify the design and functionality of Semantic's components. You will get used to these as you go on.  
 
 From hereon out it's all about experimenting. Design and CSS can be a tricky size in the beginning, but it all comes down to repetition and experimentation.
 

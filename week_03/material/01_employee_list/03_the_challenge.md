@@ -5,8 +5,7 @@ We have drawn up the following lo-fi to guide us:
 
 **image: *the_challenge_01***
 
-As mentioned, the agency would like to be able to view additional information about their employees. We will solve this by adding a **trigger** effect to the View button which will display a modal (a pop-up) with the specified employee's details when clicked. 
-Further down the line, the agency would also like to be able to **update** the details or **delete** the employee completely, but for now, let's focus on **getting** the information.  
+As mentioned, the agency would like to be able to view additional information about their employees. We will solve this by adding a **trigger** effect to the View button which will display a modal (a pop-up) with the specified employee's details when clicked.   
 
 **image: *the_challenge_02***
 

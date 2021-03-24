@@ -16,29 +16,29 @@ I would like to click a button and have the information displayed.
 
 Super! Let's hit the ground running with some Cypress testing 🤙
 
-Create a new test file ```displayEmployeeModal.feature.js``` and start cranking:
+Create a new test file `displayEmployeeModal.feature.js` and start cranking:
 
 
 **image: accessing_a_specific_employee_01**
 
-In this test we have moved additional logic inside of the ```beforeEach``` block. Since we want to trigger the pop-up on all tests, we can run this logic before every test, cleaning our code from a few redundant lines. 
+In this test we have moved additional logic inside of the `beforeEach` block. Since we want to trigger the pop-up on all tests, we can run this logic before every test, cleaning our code from a few redundant lines. 
 
 Other than that, it's the same drill.
 
 ## The modal
-It's time to create our pop-up, and, as usual, we'd like to separate our functionality. Thus, let's create a new component, ```EmployeeModal.jsx``` in our ```components``` folder.
+It's time to create our pop-up, and, as usual, we'd like to separate our functionality. Thus, let's create a new component, `EmployeeModal.jsx` in our `components` folder.
 
-A modal will need a state of ```open``` in order to toggle its visibility, but it will also need a state to store the employee data in- so we shall create another class component: 
+A modal will need a state of `open` in order to toggle its visibility, but it will also need a state to store the employee data in- so we shall create another class component: 
 
 **image: accessing_a_specific_employee_02**
 
-We are using Semantic's ```Modal``` here, which might look intimidating at first, but if you go through it line for line, it will make a lot more sense. 
+We are using Semantic's `Modal` here, which might look intimidating at first, but if you go through it line for line, it will make a lot more sense. 
 
-Now, the visual layer of our modal is created, but we also need to actually render it. Since we want a button for each employee, we will import it to our ```EmployeeList``` component and add it inside of the ```.map()``` method, like so:  
+Now, the visual layer of our modal is created, but we also need to actually render it. Since we want a button for each employee, we will import it to our `EmployeeList` component and add it inside of the `.map()` method, like so:  
 
 **image: accessing_a_specific_employee_03**
 
-Notice that we are passing down an ```id``` prop that stores the value of the individual employee's id. We will use this id to specify our next API request. 
+Notice that we are passing down an `id` prop that stores the value of the individual employee's id. We will use this id to specify our next API request. 
 
 So, with the first test in the green, let's get down with the second one!
 
@@ -51,15 +51,15 @@ So, we start off by importing axios. Then, we need two things, just like earlier
 1. A function that sends off a request and handles the response
 2. Something that will trigger this function
 
-The difference is that this API call is only necessary when the modal is actually showing. So, we add the function to an ```onClick``` attribute to the modal's trigger button, meaning that the request will be sent immediately as the button is clicked. 
+The difference is that this API call is only necessary when the modal is actually showing. So, we add the function to an `onClick` attribute to the modal's trigger button, meaning that the request will be sent immediately as the button is clicked. 
 
-Over in our ```getEmployee()``` function there's also a slight alteration. We have string interpolated and added the ```id``` inherited through ```props``` to the request's path - as you may have guessed, this is our unique identifier; also known as a **route param**. 
+Over in our `getEmployee()` function there's also a slight alteration. We have string interpolated and added the `id` inherited through `props` to the request's path - as you may have guessed, this is our unique identifier; also known as a **route param**. 
 
 So, the magic here is that, depending on which View button we click, it will look at its inherited id, inject this into the API request and receive data corresponding to that specific employee.  
 Not bad, right?
 
 Now, if you're a golden nugget, you might be thinking:  
-*'Instead of just passing down the individual employee's id to the ```EmployeeModal```, couldn't we have just passed down the whole object and then have access to both name, email, and avatar inside the Modal component without having to make an additional request?'*
+*'Instead of just passing down the individual employee's id to the `EmployeeModal`, couldn't we have just passed down the whole object and then have access to both name, email, and avatar inside the Modal component without having to make an additional request?'*
 
 The answer is yes - good thinking by the way - but then we wouldn't have been able to practice the specifying API call! 🚀
 
@@ -70,4 +70,4 @@ Now, off you go to to play! Here's a couple bonus challenges for you, if you fee
 1. Right now, the main API response comprises employee 1-6. Rewrite the call so you will instead receive employee 7-12.
 2. The reqres API is responding with 6 employees by default. Rewrite the call to receive a different amount - let's say 4?
 
-I can hint that it has something to do with ```query params```!
+I can hint that it has something to do with `query params`!
