@@ -11,7 +11,7 @@ In order to retrieve digital cash
 I need to be able to withdraw money from the ATM
 ```
 
-So, let's ponder the functionality for a second. We would like the user to be able to withdraw money by typing in an amount in the main ```input field``` and then clicking the ```withdraw``` button. Under the hood, the typed in amount will be subtracted from the user's balance and, since we just made the ```balance``` state dynamic, it should also display an updated value. 
+So, let's ponder the functionality for a second. We would like the user to be able to withdraw money by typing in an amount in the main ```input field``` and then clicking the ```withdraw``` button. Under the hood, the typed in amount will be subtracted from the user's balance and, since we just made the ```balance``` dynamic, it should also display an updated value. 
 
 **Knowing this, we can write our first test like so:**
 
@@ -30,7 +30,7 @@ A cool way to solve this is to add an ```onChange``` event listener to the ```in
 
 **image: transaction_functionality_02**
 
-To begin with, we created a new ```state``` object, called ```amount```, and set it's default value to **0**. 
+To begin with, we create a new ```state``` object, called ```amount```, and set its default value to **0**. 
 But what's more interesting is what is happening in the ```onChange``` callback function.
 
 Basically, every time the ```input field``` changes, we update the ```amount``` state with a value equal to ```event.target.value```.   Event listeners and event handlers are cornerstones in making the web dynamic and you will be practising these a lot throughout the boot camp. 
@@ -39,9 +39,11 @@ Finally, since the value is of type ```string```, but we want to use it as a ```
 
 ### The withdraw function
 Now that we have access to the amount, we can write our ```withdraw``` function. The logic itself is quite simple; we want to deduct ```amount``` from ```balance```.  
-However, we also need to build interactivity, which means that we need to update the ```balance``` state, and also add an event listener to the ```withdraw button``` that triggers the ```withdraw``` function.
+However, we also need to build interactivity, which means that we need to update the ```balance``` state, and also add an event listener to the withdraw button that triggers the ```withdraw``` function.
 
 **image: transaction_functionality_03**
+
+In this case we add an `onClick` event listener to the withdraw button. When clicked, it fires off the new `withdraw` function which, in turn, will update the balance. 
 
 **This should make our test go green. Feels good man!**
 

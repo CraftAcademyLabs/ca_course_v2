@@ -1,10 +1,10 @@
-Now, that the basic functions are working, it is time to give the ATM a voice of its own. We shall focus on the *happy path* to begin with and configure successful transaction messages. 
+Now that the basic functions are working, it is time to give the ATM a voice of its own. We shall focus on the *happy path* to begin with and configure successful transaction messages. 
 
 As always, we start with a User Story:
 ```
 As an ATM
 In order to provide better customer service 
-I need to display messages upon successful transactions
+I need to display informative messages upon successful transactions
 ```
 
 Next, we meet up with Cypress and create a new test file: ```atmDisplaysMessages.feature.js```
@@ -29,7 +29,7 @@ We can write it up like this:
 
 Feel free to add your own messages to give it your own unique feel. My ATM is apparently polite, but quite money-grubbing.. 
 
-These tests will, as usual, go flashing red in Cypress, but for a developer this is an encouraging thing - because then we have a problem to solve! 
+These tests will, as usual, go flashing red in Cypress, but for a developer, this is an encouraging thing - because then we have a problem to solve! 
 
 ## It speaks!
 And solve it, we shall. Let's start by making the `message` a dynamic entity by storing its value in a state and setting the default value to our desired welcome message:
@@ -43,8 +43,9 @@ Let's give the element a reference id and change its `innerText` to instead disp
 ```
  <h3 id="message">{this.state.message}</h3>
 ```
+Again we use the curly brackets to inject JavaScript into the JSX element.
 
-**If we now run the test, the first one should go green!**
+**If we now run the tests, the first one should go green!**
 
 Moving on, we now want to change the message after a transaction has been done; and all we need to do is revising our `withdraw` and `deposit` functions to also set a new `message` state:
 

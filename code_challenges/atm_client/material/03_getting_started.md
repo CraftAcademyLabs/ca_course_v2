@@ -6,9 +6,10 @@ Let's look through the code base and fire up the app one more time with ```$ yar
 - When the deposit button is clicked, deposit the typed amount to the balance.
 - Display messages when a transaction has been completed.
 - Display messages if any errors occurs during a transaction. 
+
 **Phew, that's quite a list!**
 
-Deep breaths. Being a good developer is all about splitting the initial problem into smaller problems and creating a plan of attack, which is what we did above.  
+Deep breaths. Being a good developer is all about splitting the initial problem into smaller problems and creating a plan of attack.
 We then want to proceed with a test-driven approach, dissecting the smaller problems into even smaller bits.
 
 Another great tool to help us clarify the problem at hand is to split the functionality up into User Stories, and this is the perfect time to write our first story. Let's start out simple:
@@ -16,7 +17,7 @@ Another great tool to help us clarify the problem at hand is to split the functi
 ```
 As a user
 In order to know how much money I have available
-I would like the ATM to displays my available balance
+I would like the ATM to displays my balance
 ```
 
 ## First test
@@ -48,11 +49,11 @@ Head over to ```App.jsx``` and give the component a state named ```balance``` an
 
 **image: getting_started_04**
 
-Now, we should be able to access this value through ```this.state.balance``` inside the ```App.jsx``` component.  However, this presents another issue as we are rendering the balance inside of the ```Balance.jsx``` component. So, how do we give the Balance component access to its parent component's (```App.jsx```) state?
+Now, we should be able to access this value through ```this.state.balance``` inside the ```App.jsx``` component.  However, this presents another issue as we are rendering the balance inside of the ```Balance.jsx``` component. So, how do we give the Balance component access to its parent's (```App.jsx```) state?
 
 **Introducing ```props```!**
 
-With React's ```props```, we can let child components inherit the state from their parents. We often refer to this as *passing down props*, and is, in our case, accomplished by giving the ```Balance``` element a key, ```balance```, and assigning the state object, ```this.state.balance``` as its value.  
+With React's ```props```, we can let child components inherit the state from their parents. We often refer to this as *passing down props*, and is, in our case, accomplished by giving the ```Balance``` element a key, ```balance```, and assigning the state, ```this.state.balance``` as its value.  
 Let's check it out:
 
 **image: getting_started_05**
