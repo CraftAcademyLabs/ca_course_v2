@@ -37,7 +37,7 @@ Basically, every time the ```input field``` changes, we update the ```amount``` 
 
 Finally, since the value is of type ```string```, but we want to use it as a ```number``` in our future calculations, we are parsing the value with the ```Number()``` constructor. 
 
-### The ```withdraw``` function
+### The withdraw function
 Now that we have access to the amount, we can write our ```withdraw``` function. The logic itself is quite simple; we want to deduct ```amount``` from ```balance```.  
 However, we also need to build interactivity, which means that we need to update the ```balance``` state, and also add an event listener to the ```withdraw button``` that triggers the ```withdraw``` function.
 

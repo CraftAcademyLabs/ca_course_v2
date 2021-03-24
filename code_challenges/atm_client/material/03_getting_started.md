@@ -23,8 +23,9 @@ I would like the ATM to displays my available balance
 With the above User Story as our scope, let's start formulating our first test to later have its logic guide our implementation code. 
 
 Create a test file:  
-
-``` $ touch cypress/integration/atmDisplaysAvailableBalance.feature.js ```
+``` 
+$ touch cypress/integration/atmDisplaysAvailableBalance.feature.js 
+```
 
 And add a ```describe``` block:
 
