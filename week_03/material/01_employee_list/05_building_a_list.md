@@ -17,12 +17,14 @@ We can start with that and write a second User Story once we've finished impleme
 ## First things first
 Let's get started with our first test.  
 
-To begin with, create a new test file in the ```cypress/integration``` folder. 
+To begin with, create a new test file in the `cypress/integration` folder. 
 
-```$ touch cypress/integration/displayEmployeeList.feature.js```  
+```
+$ touch cypress/integration/displayEmployeeList.feature.js
+```  
 
 **Start with a describe block:**
-```
+```javascript
 describe('Display list of employees', () => {
   // Our tests will go here
 })
@@ -31,27 +33,31 @@ Now it's time to write our first assertion. Let's start with a simple one - can 
 
 **image: building_a_list_01**  
 
-Since we want to visit our site on all tests, we add this inside a ```beforeEach``` block. Everything that goes inside this block will be run before each test.  
+Since we want to visit our site on all tests, we add this inside a `beforeEach` block. Everything that goes inside this block will be run before each test.  
 
-Then we create our ```it``` block and write our first assertion. We want to access the element that has an ```id``` called ```header```, and we want this element to contain the text: *Employee List*. As you know, there's many different ways to get access to elements in Cypress. In this challenge, we will be using ```classes``` and ```id's```.
+Then we create our `it` block and write our first assertion. We want to access the element that has an `id` called `header`, and we want this element to contain the text: *Employee List*. As you know, there's many different ways to get access to elements in Cypress. In this challenge, we will be using `classes` and `id's`.
 
-All of this goes inside our initial ```describe``` block, nothing new here!
+All of this goes inside our initial `describe` block, nothing new here!
 
 **Right, let's fire up Cypress and watch our test go red!**  
-```$ yarn cypress```  
+```
+$ yarn cypress
+```  
 
-*```Expected to find element: #header, but never found it.```*  
+```
+Expected to find element: #header, but never found it.
+``` 
 
 Commit your progress and let's head into implementation!
 
 ## Making our first test go green  
 You have probably started to get the gist of this - obviously Cypress couldn't find something that doesn't exist yet, so that's exactly what we will change.
 
-Let's visit ```App.js``` and first of all rewrite it into a class component. You will learn much more about functional vs class components down the line, but for now, let's just rewrite the component into something like this:  
+Let's visit `App.jsx` and first of all rewrite it into a class component. You will learn much more about functional vs class components down the line, but for now, let's just rewrite the component into something like this:  
 
 **image: building_a_list_02**
 
-And then we add an ```h1``` element and assign it an ```id="header"```
+And then we add an `h1` element and assign it an `id="header"`
 
 **image: building_a_list_03**
 
@@ -62,20 +68,20 @@ Right, now we're getting warmed up, so let's pick up the pace and create the lis
 
 We want to display details for 6 employees. Why 6? Well, we have to decide on something, and we want to be in control of the test data and of what we are actually showing to the user.  
 
-Let's start with a new ```it``` block:
+Let's start with a new `it` block:
 
 **image: building_a_list_04**
 
-So, what this test implies is that we expect a sort of container element with an ```id``` of ```employee-list```. We then look ```within``` this and look for elements with a ```class``` attribute of ```employee-item```. 
+So, what this test implies is that we expect a sort of container element with an `id` of `employee-list`. We then look `within` this and look for elements with a `class` attribute of `employee-item`. 
 
-Knowing that we want the list to contain 6 items of employee details, we expect the ```cy.find('.employee-item')``` to return an array of these 6 elements.  
-This allows us to use the ```have.length``` matcher to count the elements in the array and expect it to equal 6. 
+Knowing that we want the list to contain 6 items of employee details, we expect the `cy.find('.employee-item')` to return an array of these 6 elements.  
+This allows us to use the `have.length` matcher to count the elements in the array and expect it to equal 6. 
 
 We would also like to test that the list items do in fact contain the correct information. Let's do a sample test:
 
 **image: building_a_list_04_2**
 
-Once again, we go within the ```employee-list``` element and look for an ```employee-item```. This time though, we target the ```first()``` item, look for an element with a class of ```name```, and expect this element to contain *'George Bluth'*. 
+Once again, we go within the `employee-list` element and look for an `employee-item`. This time though, we target the `first()` item, look for an element with a class of `name`, and expect this element to contain *'George Bluth'*. 
 
 Why George? Well, George is awesome..  
 
@@ -88,16 +94,16 @@ So, we want to display a collection of employees, which entails two things:
 
 Working on this is also a good opportunity to practice SoC (separation of concerns), which is a software design principle that states that each bit of functionality should live in its own file.
 
-So instead of writing the list inside of our ```App.js``` component, let's extract the functionality to a separate component.  
-Create a new folder inside ```src``` and call it ```components```. Inside this folder, we create the new component ```EmployeeList.jsx```
+So instead of writing the list inside of our `App.jsx` component, let's extract the functionality to a separate component.  
+Create a new folder inside `src` and call it `components`. Inside this folder, we create the new component `EmployeeList.jsx`
 
-Before we get cracking, let's import the component inside ```App.js``` and render it inside the ```return``` block
+Before we get cracking, let's import the component inside `App.jsx` and render it inside the `return` block
 
 **imgage: building_a_list_04_3**
 
-Inside of ```EmployeeList``` we create a class component and store the employee details in its state.
+Inside of `EmployeeList` we create a class component and store the employee details in its state.
 The agency has provided us with a sample list for test purposes:
-```
+```javascript
 employees: [
       { id: 1, first_name: "George", last_name: "Bluth", avatar: "https://reqres.in/img/faces/1-image.jpg" },
       { id: 2, first_name: "Janet", last_name: "Weaver", avatar: "https://reqres.in/img/faces/2-image.jpg" },
@@ -114,14 +120,14 @@ Let's store this in our component's state to look something like this:
 
 Now, to create the list, we could of course hard-code a list element for each employee, but this would be tedious work and we would also have to manually add new list elements in case new employees are added in the future. 
 
-Instead we will use a simple, but powerful piece of functionality from JavaScript - the ```.map()``` method. 
+Instead we will use a simple, but powerful piece of functionality from JavaScript - the `.map()` method. 
 
 You may remember this from your portfolio challenge, but if you still don't feel comfortable with it, I encourage you to go and read up on it, as it will be used extensively in your coding future. Check the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) for example.
 
 We will use the method to loop through our array of employee details and create a list element containing the details for each iterated employee.   
 This way, it doesn't matter whether the employee details array has 5 elements or 500, making our code dynamic!
 
-All these ```<li>``` elements are then stored in a variable, ```employeeList```, which we can then render inside of a ```<ul></ul>``` container, like:
+All these `<li>` elements are then stored in a variable, `employeeList`, which we can then render inside of a `<ul></ul>` container, like:
 
 **image: building_a_list_06**
 
