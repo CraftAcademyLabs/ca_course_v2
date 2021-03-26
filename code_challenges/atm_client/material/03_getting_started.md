@@ -45,7 +45,7 @@ Spontaneously, there's an easy fix to this:
 
 However, while this will make our test go green, we're not happy with it, as the value is now hard-coded. Instead, we want to start using one of React's main features: **storing data inside a component's state**.
 
-Head over to ```App.jsx``` and give the component a state named ```balance``` and sets its value to ```1000```.
+Head over to ```App.jsx``` and give the component a state named ```balance``` and set its value to ```1000```.
 
 **image: getting_started_04**
 
@@ -62,7 +62,15 @@ Over in ```Balance.jsx```, we can now access this key (*or prop*) by writing ```
 
 **image: getting_started_06**
 
-Notice that we add it inside our ```<h2>``` element wrapped in curly brackets. In React, this is how we inject JavaScript functionality directly into the JSX elements.
+Similar to `state`, `props` is an object that can store other objects. What's really happening when we pass down the `balance` state object is that it gets nested inside of the `props` object, looking something like this: 
+```
+props : {
+  balance: 1000
+}
+```
+Unlike `states`, however, `props` are immutable, meaning they cannot change.
+
+Notice that we add the inherited balance inside our ```<h2>``` element wrapped in curly brackets. In React, this is how we inject JavaScript functionality directly into the JSX elements.
 
 With this, we have added a dynamic relationship between the two components which we will utilize in the next chapter. 
 

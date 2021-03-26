@@ -25,7 +25,7 @@ Let's go through the logic real quick:
 
 **Super! Let's get down with some implementation**
 
-Before we can create the actual withdrawal functionality, we need to be able to access the value that the user has typed into the input field.  
+Before we can create the actual withdraw functionality, we need to be able to access the value that the user has typed into the input field.  
 A cool way to solve this is to add an ```onChange``` event listener to the ```input field``` and store its value in a state, like this:
 
 **image: transaction_functionality_02**
