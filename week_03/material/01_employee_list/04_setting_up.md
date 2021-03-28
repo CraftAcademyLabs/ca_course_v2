@@ -40,7 +40,7 @@ Over in `package.json`, add the following lines to the `scripts` section:
 ```json
 "scripts": {
   //...
-  "start:silent": "PORT=3000 BROWSER=none react-scripts start",
+  "start:silent": "BROWSER=none react-scripts start",
   "cy:open": "cypress open",
   "cypress": "start-server-and-test start:silent http://localhost:3000/ cy:open"
 }

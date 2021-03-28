@@ -158,4 +158,5 @@ Very nice! You deserve a break, perhaps some fresh air or a cup of coffee.
 Whenever you're ready, let's hit that round 3!
 
 ## Round 3
-  - built in methods / iterators
+  - built in methods and iterators
+  - classes
