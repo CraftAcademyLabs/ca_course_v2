@@ -30,10 +30,22 @@ puts one+two
 winner = 'Jack'
 prize = 10000
 
-puts "Wow, " + winner + "! You just won " + prize + "kr!"
+puts 'Wow, ' + winner + '! You just won ' + prize + 'kr!'
 # should output: Wow, Jack! You just won 10000kr!
 ```
 Nice one. These small converters may come in handy in the future!
+
+#### **String interpolation**
+Something else that will definitely come in handy is `string interpolation`. Instead of having to write all those plusses and keeping check of correct spacing inside the quotes, we can mash it all together using double quotes and wrapping everything that's not string in a `#{}`.
+
+**Rewrite the `puts` with string interpolation**
+```
+issue = 'plusses'
+adjective = 'massive'
+noun = 'headache'
+
+puts 'All the ' + issue + ' are giving me a ' + adjective + ' ' + noun + ' please make it stop!'
+```
 
 #### **Accessing info inside arrays and hashes**
 Something that you will be doing over and over again is storing information inside arrays and hashes. But what's even more important is to be able to access this information. Let's do some digging.
@@ -93,12 +105,31 @@ Let's get those repetitious tasks out of the way with some looping:
 # 3
 # 4
 # 5
+```
+Syntax recap for the loops:
+```
+# while loop
 
+while <condition>
+  <code block>
+end
+
+# unless loop
+
+unless <condition>
+  <code block>
+end
+
+# for loop
+
+for <variable> in <expression>
+  <code block>
+end
 ```
 #### **Conditionals**
 Super! Now, let's add another layer of logic.
 
-**Use an `if else` inside the loop to log the expected output:**
+**Choose one of your loops from above and use an `if else` inside it to log the expected output:**
 
 ```
 for i in 1..5
@@ -193,7 +224,7 @@ my_confused_array = [2, 5, 3, 1, 9, 3, 6, 2]
 
 # Add code here
 
-p my_confused_array
+print my_confused_array
 
 # should output: [9, 6, 5, 3, 3, 2, 2, 1]
 ```
@@ -217,7 +248,7 @@ my_new_array = ?
 
 # Add code here
 
-p my_new_array
+print my_new_array
 
 # should output: [6, 7, 8, 9, 10]
 ```
@@ -235,7 +266,10 @@ my_dumbbell.weight
 # should output: 28
 ```
 
-#### **Final challenge**
+Brilliant! This should make you better equipped to tackle whatever comes next.   
+Whether you found this difficult or easy, it's always good to practice the fundamentals from time to time. 
+
+<!-- #### **Final challenge**
 Brilliant! You made it this far, which is awesome.
 
 If you're up for it, let's do a final exercise. 
@@ -252,4 +286,4 @@ end
 squaring(4567)
 # should output: 16253649
 # because 4² is 16, 5² is 25, 6² is 36, and 7² is 49
-```
+``` -->
