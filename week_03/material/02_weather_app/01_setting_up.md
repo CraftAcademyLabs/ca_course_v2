@@ -21,7 +21,7 @@ A small bullet list should suffice:
 1. Generate an app and call the folder `open_weather_app`
 2. Clean up the code base
 3. Install testing and server dependencies
-4. Configure Cypress and add additional scripts to `package.json`
+4. Configure `cypress.json` and add additional scripts to `package.json`
 
 Great. Now, we're in a good place, foundation is laid, mind is sharp and open for new learning.  
 
