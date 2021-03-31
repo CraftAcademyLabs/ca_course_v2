@@ -5,7 +5,7 @@ They may seem intimidating at first, but you'll become friends soon enough, don'
 ## Setting the stage
 Before we start playing around with the new concepts, we need to write some standard tests and think about what we actually want to do. 
 
-And can you think of a better way to kick it off than by writing a User Story? I think not:
+And can you think of a better way to get the ball rolling than by writing a User Story? I think not:
 ```
 As a user
 In order to better be able to plan my day
@@ -13,7 +13,7 @@ I want to see the temperature for my current location
 ```
 As for the visual part, there's not that much to this one; we want an app to render an element that displays the temperature - as well as the user's location, ideally. 
 
-A test for this display is also pretty straight forward:
+A test for this functionality is also pretty straight forward:
 ```
 describe("displays weather info for user's location", () => {
 
@@ -27,17 +27,20 @@ describe("displays weather info for user's location", () => {
 })
 ```
 
-This may or may not be new to you, but in this challenge we'll be using `data-cy` as references. Cypress sees this way of referencing as best practice since its sole purpose is working as an access point for your tests. Using classes, ids, or other element selectors are subject to potential changes in your implementation code. Maybe you (or another developer even) decide that the `header` element shouldn't have a `class='header'`, but instead an `id='hero-section'`. This will cause the tests to fail and cause commotion. 
+This may or may not be new to you, but in this challenge we'll be using `data-cy` as reference points.  
 
-So, while we have to add an extra attribute to our elements, it might help us further down the line when we go back to the code and revise or hand the code over to another team.
+Cypress sees this way of referencing as best practice since its sole purpose is to work as an access point for your tests. Using classes, ids, or other element selectors are subject to potential changes in your implementation code. Maybe you (or another developer even) decide that the `header` element shouldn't have a `class='header'`, but instead an `id='hero-section'`. This will cause the tests to fail and cause commotion. 
+
+So, while we have to add an extra attribute to our elements, it might help us further down the line when we go back to the code and revise - or hand the code over to another team.
 
 Also, here's the celsius symbol: `°C`. 
 
 ## Stubbing
-The test above implicitly assumes that the `temp` and `location` are fixed values. However, since what we want is to access the user's geolocation and then display the temperature and location for that specific user, we would get different values for every user. 
+The test above implicitly assumes that the `temp` and `location` contain fixed values. However, since what we want is to access the user's geolocation and then display the temperature and location for that specific user, we would actually get different values for every user. 
 
-So how do implement dynamic code while maintaining a consistent outcome in our tests?
+**So how do implement dynamic code while maintaining a consistent outcome in our tests?**
 
+Great question!  
 We use [cy.stub](https://docs.cypress.io/api/commands/stub#Syntax) - which is a test stub used to simulate a certain behavior that your app depends on. And what kind of behavior are we dependent on? In other words, what kind of functionality is responsible for making our code unique for the user?
 
 **That's right, the `latitude` and `longitude` from the `navigator.geolocation.getCurrentPosition()` function!**

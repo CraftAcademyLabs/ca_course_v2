@@ -1,7 +1,7 @@
-## Or so we thought..!
-Right now, every time we run Cypress, we're actually sending off two real API requests. This isn't really a problem in itself, but imagine if you were paying for that API service, or if it was limited to 1 request per second, or something third.. 
+## Or so you thought..!
+Right now, every time we run Cypress, we're actually sending off two real API requests. This isn't really a problem in itself, but imagine if you were paying for that API service, or if it was limited to 1 request per second, or something else super problematic.. 
 
-Point being, it's worth your while to know how to block API calls in your test environment, create a `mock` of the response, and use that in your tests instead. Let's get rolling!
+Point being, it's worth your while to know how to block API calls in your test environment, create a `mock` of the response, and use that in your tests instead. Let's go!
 
 ## Creating a mock
 There's two primary moving parts in this endeavour:
@@ -21,7 +21,7 @@ Let's add this to our test before diving into fixtures:
 
 **image: mocking_and_displaying_01**
 
-As we only have 1 call to each of the URIs, we can set the `*` wildcards rather early on in the address. If we would've had multiple calls using the same API base, this would cause conflicts and we would have had to specify the URI more precisely. 
+As we only have 1 call to each of the URIs, we can set the `*` wildcards rather early on in the address. If we would've had multiple calls using the same API base, this would cause conflicts and we would have had to specify the URI more precisely in the intercept. 
 
 Running the test, Cypress is definitely not happy with this:
 ```
@@ -97,9 +97,9 @@ So I'll go ahead and change the `fixture`.
 **That should pretty much do it!**
 
 I trust that your app looks absolutely amazing and that Cypress has blessed you with green caresses.  
-This weather app might not be a game-breaker, however the concepts that you have just pulled off lay the foundation to many apps out there:
+This weather app might not be a game-breaker, however the concepts that you have just pulled off lay the foundation of many apps out there:
 1. Acquire information about the user.
 2. Use this information dynamically to send API requests.
 3. Display the personalized responses.
 
-With that said, there's no rest for the weary! Let's keep the ball rolling with some extra challenges.
+With that said and a few pats on your back, there's no rest for the weary! Let's keep the ball rolling with some extra challenges.

@@ -5,12 +5,12 @@ Let's go through the control flow one more time:
 3. Store the API responses in our state.
 4. Display the appropriate information on our site
 
-Maintaining an overview like this is good practice to avoid getting stuck and keeping an efficient work flow. With that said, let's get on with it!
+Maintaining an overview like this is good practice to avoid getting stuck and keeping an efficient work flow throughout. With that said, let's get on with it!
 
 ## Getting user's position
-As we have practiced previously, when we want to display information that's based on API calls on our site's initial render, we can use `componentDidMount()`. 
+As we have practiced previously, when we want to display information on our site's initial render that is based on API calls, we can use `componentDidMount()`. 
 
-Define a state to contain the user's position, and other than that it's just carrying out the same code as we did in **Prerequisites**.
+**Define a state to contain the user's position, and, other than that, it's just carrying out the same code as we did back in *Prerequisites*.**
 
 **image: geolocation_and_fecthing_data_01**
 
@@ -19,12 +19,12 @@ Put a debugger in as showed (that's not commented out) and have a look at the `p
 ## Fetching temperature and location data
 Now that we hold the user's `latitude` and `longitude`, it's time to make those API calls.
 
-First, install Axios and import it to `App.jsx`
+First, install Axios and import it in `App.jsx`
 ```
 $ yarn add axios
 ```
 
-Now, we actually want to revise out code a bit. Instead of storing the user's geolocation in a state and then use the state's information to make the API calls, we can actually do it directly within the `getCurrentPosition()` and skip a step!
+Now, we actually want to revise out code a bit. Instead of storing the user's geolocation in a state and then later using the state's information to make the API calls, we can actually do it directly within the `getCurrentPosition()` and skip a step!
 
 **image: geolocation_and_fecthing_data_02**
 
@@ -43,9 +43,9 @@ Staying in the debugger, it's time to do some exploration. On our site, we want 
 
 **Take 5 minutes to try to dig them out yourself!**
 
-It is, of course, a possibility just to store the entire responses in our state, but it's best practice to keep it as clean as possible. We can always add more data as we progress.
+It is, of course, a possibility just to store the entire responses in our state, but it's best practice to keep it as clean as possible. We can always add more data to the state as we progress.
 
-Be mindful when you are searching for the city object, since Open Cage's response is actually inconsistent on this. In my case, `postal_city` will retrieve my city, but in your case it may very well be called something else, lie `city`. This is of course something we will have to address later on.
+Be mindful when you are searching for the city object, since Open Cage's response is actually inconsistent on this. In my case, `postal_city` will retrieve my city, but in your case it may very well be called something else, like `city`. This is of course something we will have to address later on.
 
 To start with, make sure that it fits your own response.
 ```
@@ -56,7 +56,7 @@ let temp = weatherResponse.data.current.temp
 this.setState({ location: {city: city, temp: temp} })
 ```
 
-But let's refactor this to be more readable as well as making it more efficient to add additional data in the future:
+This will work, but let's refactor this to be more readable as well as making it more efficient to add additional data to the state in the future:
 
 **image: geolocation_and_fetching_data_03**
 
