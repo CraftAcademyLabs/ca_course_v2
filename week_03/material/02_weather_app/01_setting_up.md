@@ -22,6 +22,7 @@ A small bullet list should suffice:
 2. Clean up the code base
 3. Install testing and server dependencies
 4. Configure `cypress.json` and add additional scripts to `package.json`
+5. Put an x on `App.js(x)` and rewrite it into a `class component`
 
 Great. Now, we're in a good place, foundation is laid, mind is sharp and open for new learning.  
 
