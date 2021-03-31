@@ -183,12 +183,11 @@ class Donation extends Component {
 export default injectStripe(Donation);
 ```
 
-**08_client**
 Alright, let's get back to our test and start making things happen!
 
 But actually this time we will do things a little bit reversed for once and start with the implementation and then write the test.
 
-**09_client**
+**08_client**
 
 ```javascript
 import React, { Component } from "react";
@@ -226,7 +225,7 @@ export default injectStripe(Donation);
 ```
 
 Because if you run your test now, you will see that the `CardNumberElement` is actually an input field, but not any input field you see... There is a lot of underlying functionality and security in that input field and that's why we had to turn off the web security.
-**10_client**
+**09_client**
 
 ```javascript
 cy.wait(1000);
@@ -245,7 +244,7 @@ Wow, that was a lot now! And it is, tapping into these elements is a handful and
 
 Now with that, we can see that this input field is being filled in! Now we can keep adding the rest of the input fields in the same way.
 
-**11_client**
+**10_client**
 
 ```javascript
 cy.get("#card-expiry").within(() => {
@@ -263,7 +262,7 @@ cy.get("#card-cvc").within(() => {
 });
 ```
 
-**12_client**
+**11_client**
 
 ```javascript
 {
@@ -389,7 +388,7 @@ performPayment = async (stripeToken) => {
 ```
 
 So, let's pause for a second and go through what is happening here. In the `payWithStripe` function we are doing `Step 1` from the flow, we are requesting the Stripe Api for the `token`. If everything goes through and we get the `token`, then we do `Step 2` in the `performPayment` function, we send of the `token` to our own API.
-
+**18_client**
 ```javascript
 {
   this.state.message ? (
