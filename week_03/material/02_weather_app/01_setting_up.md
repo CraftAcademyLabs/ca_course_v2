@@ -1,6 +1,6 @@
 ## Displaying the weather at the user's location
-Once again, it's time to crank the complexity up a notch. 
-Our mission is to build a Weather App that will display various weather information for the user's location.
+Once again, it's time to crank the complexity up a notch.  
+Our mission this time is to build a Weather App that will display various weather information for the user's location - as well as the location itself.
 
 In the previous challenge, you used data from an API to display a list of employees.  
 In this challenge, we'll follow the same concept of receiving data from an external API - but this time, we'll be using 2 APIs that both features dynamic `query params` based on the user's location.  

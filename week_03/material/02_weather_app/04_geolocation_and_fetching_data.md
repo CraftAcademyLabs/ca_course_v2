@@ -24,7 +24,7 @@ First, install Axios and import it to `App.jsx`
 $ yarn add axios
 ```
 
-Now, we actually want to revise out code a bit. Instead of storing the user's position in a state and then use the state's information to make the API calls, we can actually do it directly within the `getCurrentPosition()` and skip a step!
+Now, we actually want to revise out code a bit. Instead of storing the user's geolocation in a state and then use the state's information to make the API calls, we can actually do it directly within the `getCurrentPosition()` and skip a step!
 
 **image: geolocation_and_fecthing_data_02**
 
@@ -39,20 +39,29 @@ Finally, as we always need to `await` axios requests, we add this keyword before
 
 **Super! Check out the responses using the `debugger` and you should see some sweet data.**
 
-It's time to do some exploration. We want to display the temperature and the location - i.e. the city - so let's dig these values out from the responses and store them in our state.
+Staying in the debugger, it's time to do some exploration. On our site, we want to display the temperature and the location - i.e. the city - so let's dig these values out from the responses and store them in our state.
 
-Take 5 minutes to try to dig them out yourself!
+**Take 5 minutes to try to dig them out yourself!**
 
-It is, of course, a possibility just to save the entire responses in our state, but it's best practice to keep it as clean as possible. We can always store more data as we progress.
+It is, of course, a possibility just to store the entire responses in our state, but it's best practice to keep it as clean as possible. We can always add more data as we progress.
 
+Be mindful when you are searching for the city object, since Open Cage's response is actually inconsistent on this. In my case, `postal_city` will retrieve my city, but in your case it may very well be called something else, lie `city`. This is of course something we will have to address later on.
+
+To start with, make sure that it fits your own response.
 ```
-// ..
+// .. still inside the getCurrenPosition()
+
 let city = locationResponse.data.results[0].components.postal_city
 let temp = weatherResponse.data.current.temp
 this.setState({ location: {city: city, temp: temp} })
 ```
 
-But let's refactor this to be more readable and also make it more efficient to add additional data in the future:
+But let's refactor this to be more readable as well as making it more efficient to add additional data in the future:
 
-**image: geolocation_and_fecthing_data_03**
+**image: geolocation_and_fetching_data_03**
 
+Go ahead and check `this.state` with the `debugger` and you should see your city and the temperature! Should look something like this:
+
+**image: geolocation_and_fetching_data_04**
+
+Superb! That means that we're ready to render some visuals!

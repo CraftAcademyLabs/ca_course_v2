@@ -54,4 +54,4 @@ So go ahead and download that and try to use what you've learned so far to recei
 *An API call to Open Weather:*   
 **image: prerequisites_04**
 
-In Postman you can save both the requests and the responses for later use. For your convenience, go ahead and save your responses because - **spoiler alert** - we'll use those in the next chapter to create something called a `fixture`!
+In Postman you can save both the requests and the responses for later use. For your convenience, go ahead and save your responses because - **spoiler alert** - we'll use those in the next chapters to create something called a `fixture`!
