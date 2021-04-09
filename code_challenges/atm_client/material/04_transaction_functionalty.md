@@ -15,7 +15,7 @@ So, let's ponder the functionality for a second. We would like the user to be ab
 
 **Knowing this, we can write our first test like so:**
 
-**image: transaction_functionality_01**
+![](../images/transaction_functionality_01.png)
 
 Let's go through the logic real quick: 
 - We visit our site
@@ -28,7 +28,7 @@ Let's go through the logic real quick:
 Before we can create the actual withdraw functionality, we need to be able to access the value that the user has typed into the input field.  
 A cool way to solve this is to add an ```onChange``` event listener to the ```input field``` and store its value in a state, like this:
 
-**image: transaction_functionality_02**
+![](../images/transaction_functionality_02.png)
 
 To begin with, we create a new ```state``` object, called ```amount```, and set its default value to **0**. 
 But what's more interesting is what is happening in the ```onChange``` callback function.
@@ -41,7 +41,7 @@ Finally, since the value is of type ```string```, but we want to use it as a ```
 Now that we have access to the amount, we can write our ```withdraw``` function. The logic itself is quite simple; we want to deduct ```amount``` from ```balance```.  
 However, we also need to build interactivity, which means that we need to update the ```balance``` state, and also add an event listener to the withdraw button that triggers the ```withdraw``` function.
 
-**image: transaction_functionality_03**
+![](../images/transaction_functionality_03.png)
 
 In this case we add an `onClick` event listener to the withdraw button. When clicked, it fires off the new `withdraw` function which, in turn, will update the balance. 
 
@@ -59,11 +59,11 @@ I need to be able to deposit money through the ATM
 
 Then we go back in our ```atmTransactionfunctionality``` test, revise the ```describe``` block, and add a new test, like so: 
 
-**image: transaction_functionality_04**
+![](../images/transaction_functionality_04.png)
 
 Now, if you're up for it, try to make that new test block pass by yourself!  
 It's really good practice to challenge yourself, as this is when the puzzle truly starts to resolve.
 
 If you get stuck, the solution lies below.
 
-**image: transaction_functionality_05**
+![](../images/transaction_functionality_05.png)

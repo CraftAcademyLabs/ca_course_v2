@@ -31,13 +31,14 @@ $ yarn run cypress open
 This command will run a configuration script and add a bunch of example tests that can be a reference for you, and help you to get to know the various Cypress commands.  
 When you have examined them a bit more, go ahead and delete the examples folder. 
 
-**Step 3:** Let’s also configure a default URL for Cypress to use, so we don’t have to specify this in our tests:
+**Step 3:** Let’s also configure a default URL for Cypress to use, so we don’t have to specify this in our tests - as well as configuring the `chromeWebSecurity` to `false`.
 
 Inside `cypress.json`, add the following line to the empty object:
 
 ```
 {
-  "baseUrl": "http://localhost:3000"
+  "baseUrl": "http://localhost:3000",
+  "chromeWebSecurity": false
 }
 ```
 
