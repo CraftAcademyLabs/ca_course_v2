@@ -27,13 +27,13 @@ I should not make withdrawals if amount is higher than balance
 
 With this, let's create a new test file and call it `atmSadPathFunctionality.feature.js`:
 
-**image: the_sad_path_01**
+![](../images/the_sad_path_01.png)
 
 As you may have guessed, in order to make these tests go green, we need to wrap our `withdraw` logic inside of an `if else` statement.
 
 If we rewrite the function into something like this, the tests should pass!
 
-**image: the_sad_path_02**
+![](../images/the_sad_path_02.png)
 
 **Splendid! First obstacle complete. Let's head further down the path..**
 
@@ -47,7 +47,7 @@ I should not make transactions if the amount evaluates to 0
 
 Back in our sad path test file, we'll add two more test blocks:
 
-**image: the_sad_path_03**
+![](../images/the_sad_path_03.png)
 
 For this final obstacle, it's time to venture out on your own two legs; make those two tests pass!
 

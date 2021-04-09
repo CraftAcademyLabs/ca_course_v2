@@ -16,7 +16,7 @@ Initially, there's 3 different messages that we want to test for:
 
 The first one is pretty straight forward:
 
-**image: the_atm_speaks_01**
+![](../images/the_atm_speaks_01.png)
 
 While the test block doesn't feature anything new, there's a new addition to the `describe` block - namely a `beforeEach()` hook. 
 
@@ -25,7 +25,7 @@ Everything inside this hook will be carried out before each test. Since we want 
 Moving on to the two other messages, they call for a bit more action, as we need to carry out a transaction in order to display the message.  
 We can write it up like this:
 
-**image: the_atm_speaks_02**
+![](../images/the_atm_speaks_02.png)
 
 Feel free to add your own messages to give it your own unique feel. My ATM is apparently polite, but quite money-grubbing.. 
 
@@ -34,7 +34,7 @@ These tests will, as usual, go flashing red in Cypress, but for a developer, thi
 ## It speaks!
 And solve it, we shall. Let's start by making the `message` a dynamic entity by storing its value in a state and setting the default value to our desired welcome message:
 
-**image: the_atm_speaks_03**
+![](../images/the_atm_speaks_03.png)
 
 Next, we want to configure the rendered JSX element.  
 The code base provided an `<h3>` element, just above the `input field`, that would serve perfectly for this.  
@@ -49,7 +49,7 @@ Again we use the curly brackets to inject JavaScript into the JSX element.
 
 Moving on, we now want to change the message after a transaction has been done; and all we need to do is revising our `withdraw` and `deposit` functions to also set a new `message` state:
 
-**image: the_atm_speaks_04**
+![](../images/the_atm_speaks_04.png)
 
 Since we also wanted to display the transacted amount, we `string interpolate` the `amount` into the message. That's all. Not too crazy, right? 
 
