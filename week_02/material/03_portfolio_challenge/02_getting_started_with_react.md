@@ -44,6 +44,7 @@ Your folder and file structure should look something like this:
 ├── README.md
 ├── node_modules
 ├── package.json
+├── .gitignore
 ├── public
 │ ├── favicon.ico
 │ ├── index.html
@@ -52,7 +53,7 @@ Your folder and file structure should look something like this:
 │ ├── App.jsx
 │ ├── index.css    
 │ ├── index.js    
-│ └── serviceWorker.js  
+│ └── reportWebVitals.js  
 └── yarn.lock
 ```
 You will note a few errors in your browser as you delete the files. That is, of course, caused by the imports in your index.js and App.jsx. Make sure that none of the deleted files are being imported in any of these two files. At this stage, I usually also clean up the returned `jsx` by the App component.
