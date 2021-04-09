@@ -30,6 +30,7 @@ $ touch cypress/integration/atmDisplaysAvailableBalance.feature.js
 
 And add a ```describe``` block:
 
+![](./images/getting_started_01.png)
 **image: getting_started_01**
 
 Now, for the actual test. We want the ATM to display the user's available balance, but since we won't be dealing with an actual user in this exercise, but rather the functionality of the ATM, we will settle with setting the initial value to a fixed number, like 1000.  
