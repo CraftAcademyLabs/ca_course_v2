@@ -2,7 +2,7 @@ Let's look through the code base and fire up the app one more time with ```$ yar
 
 CLARIFY HERE
 ## To-do list:  
-- Display the user's balance
+- Display the amount that the user has available in their balance.
 - When the withdraw button is clicked, reduce the typed amount from the balance.
 - When the deposit button is clicked, add the typed amount to the balance.
 - Display messages when a transaction has been completed.
@@ -54,7 +54,7 @@ Now, we should be able to access this value through ```this.state.balance``` ins
 
 **Introducing ```props```!**
 
-With React's ```props```, we can let child components inherit the state from their parents. We often refer to this as *passing down props*, and is, in our case, accomplished by giving the ```Balance``` element a key, ```balance```, and assigning the state, ```this.state.balance``` as its value.  
+With React's ```props```, we can let child components inherit data from their parents. We often refer to this as *passing down props*, and is, in our case, accomplished by giving the ```Balance``` element a key, ```balance```, and assigning the state, ```this.state.balance``` as its value.  
 Let's check it out:
 
 ![](../images/getting_started_05.png)
@@ -69,7 +69,7 @@ props : {
   balance: 1000
 }
 ```
-Unlike `states`, however, `props` are immutable, meaning they cannot change.
+Unlike `state`, however, `props` are immutable, meaning they cannot change.
 
 Notice that we add the inherited balance inside our ```<h2>``` element wrapped in curly brackets. In React, this is how we inject JavaScript functionality directly into the JSX elements.
 

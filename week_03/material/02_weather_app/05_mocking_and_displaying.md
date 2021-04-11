@@ -19,7 +19,7 @@ cy.intercept('URI', { fixture: 'example.json' })
 
 Let's add this to our test before diving into fixtures:
 
-**image: mocking_and_displaying_01**
+![](../../images/weather_app/mocking_and_displaying_01.png)
 
 As we only have 1 call to each of the URIs, we can set the `*` wildcards rather early on in the address. If we would've had multiple calls using the same API base, this would cause conflicts and we would have had to specify the URI more precisely in the intercept. 
 

@@ -7,7 +7,7 @@ In order to provide better customer service
 I need to display informative messages upon successful transactions
 ```
 
-Next, we meet up with Cypress and create a new test file: ```atmDisplaysMessages.feature.js```
+Next, we meet up with Cypress again and create a new test file called: ```atmDisplaysMessages.feature.js```
 
 Initially, there's 3 different messages that we want to test for:
 - A greeting
@@ -20,7 +20,7 @@ The first one is pretty straight forward:
 
 While the test block doesn't feature anything new, there's a new addition to the `describe` block - namely a `beforeEach()` hook. 
 
-Everything inside this hook will be carried out before each test. Since we want to visit the same site for all tests, this is an appropriate place for our `cy.visit`.
+Everything inside this hook will be carried out before each test. Since we want to visit the same site for all future tests in this file, this is an appropriate place for our `cy.visit`.
 
 Moving on to the two other messages, they call for a bit more action, as we need to carry out a transaction in order to display the message.  
 We can write it up like this:
@@ -53,11 +53,11 @@ Moving on, we now want to change the message after a transaction has been done; 
 
 Since we also wanted to display the transacted amount, we `string interpolate` the `amount` into the message. That's all. Not too crazy, right? 
 
-That should do it for the happy path! Let's run the entire test suite and see all 6 tests go green. Happy days!
+That should do it for the happy path! Let's run the entire test suite and see all 6 test blocks go green. Happy days!
 
 **This doesn't mean that we're done, though..**
 
-In your Cypress browser, try to type in 10000 and click withdraw. This will leave your balance in huge deficit, and - while the rest of the world keeps printing money in a similar fashion - this is something that we would like to avoid.  
+In your Cypress browser, try to type in 10000 and click withdraw (yes, we can actually also do manual testing here!). This will leave your balance in huge deficit, and - while the rest of the world keeps printing money in a similar fashion - this is something that we would like to avoid.  
 
 Following the same notion, if we try to leave `amount` empty or type in a **0**, the ATM still performs a transaction. We would like to fix this too.
 

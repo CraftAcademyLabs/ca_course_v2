@@ -1,6 +1,6 @@
-1. Change Balance to class component in repo
+It's time that we revisit our lovely ATM machine. However, this time we will be focusing on the visual aspect. 
 
-Let's revisit the ATM, but this we will be focusing on the visual aspect. You have previously modified the DOM with vanilla JavaScript...
+You have previously modified the DOM with vanilla JavaScript...
 
 **Depending on where in the course this is, this should be revised**
 

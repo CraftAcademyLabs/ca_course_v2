@@ -48,7 +48,7 @@ We use [cy.stub](https://docs.cypress.io/api/commands/stub#Syntax) - which is a 
 In Cypress, the `cy.stub` goes in, jams the targeted function, and replaces the outcome with a predetermined outcome. Furthermore, `cy.stub` is leveraging on the [Sinon.js](https://sinonjs.org/) framework and supports all Sinon methods.  
 Let's take a look at the solution and then go through the logic: 
 
-**image: levelling_up_in_cypress_01**
+![](../../images/weather_app/levelling_up_in_cypress_01.png)
 
 Hooold on, that's a whole lot of new stuff! 
 
@@ -57,7 +57,7 @@ It is indeed, so let's stay put and break down the moving parts:
 1. `cy.visit` has a main role of visiting a URL, but it can also take [optional arguments](https://docs.cypress.io/api/commands/visit#Arguments) to modify its behavior. We're using the `onBeforeLoad()` function which calls its code block before the page has loaded all of its resources.
 2. Inside the code block, the first thing we do is creating the variable, `stubLocation`, containing the stubbed value. Notice that we format it to mimic the outcome that we got earlier:
 
-**image: prerequisites_02**
+![](../../images/weather_app/prerequisites_02.png)
 
 3. With the stubbed value defined, we move on to create the actual stub.  
 `cy.stub` takes 2 arguments, the first being the object that 'owns' the function to be stubbed out, and the second being the actual function.  

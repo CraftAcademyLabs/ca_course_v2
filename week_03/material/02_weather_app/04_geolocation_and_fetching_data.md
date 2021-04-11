@@ -12,7 +12,7 @@ As we have practiced previously, when we want to display information on our site
 
 **Define a state to contain the user's position, and, other than that, it's just carrying out the same code as we did back in *Prerequisites*.**
 
-**image: geolocation_and_fecthing_data_01**
+![](../../images/weather_app/geolocation_and_fetching_data_01.png)
 
 Put a debugger in as showed (that's not commented out) and have a look at the `position` object for yourself!
 
@@ -26,7 +26,7 @@ $ yarn add axios
 
 Now, we actually want to revise out code a bit. Instead of storing the user's geolocation in a state and then later using the state's information to make the API calls, we can actually do it directly within the `getCurrentPosition()` and skip a step!
 
-**image: geolocation_and_fecthing_data_02**
+![](../../images/weather_app/geolocation_and_fetching_data_02.png)
 
 First, we extract the user's position using `destructuring`, which you should be familiar with by now. Basically, it's just a more handy way of writing:
 ```
@@ -58,10 +58,10 @@ this.setState({ location: {city: city, temp: temp} })
 
 This will work, but let's refactor this to be more readable as well as making it more efficient to add additional data to the state in the future:
 
-**image: geolocation_and_fetching_data_03**
+![](../../images/weather_app/geolocation_and_fetching_data_03.png)
 
 Go ahead and check `this.state` with the `debugger` and you should see your city and the temperature! Should look something like this:
 
-**image: geolocation_and_fetching_data_04**
+![](../../images/weather_app/geolocation_and_fetching_data_04.png)
 
 Superb! That means that we're ready to render some visuals!

@@ -57,7 +57,7 @@ For this final obstacle, it's time to venture out on your own two legs; make tho
 
 When complete, run the entire test suite and watch all 10 tests light up in green saturation!  
 
-Well done. The functionalities used throughout this exercise are the very pillars to the realm of React, and mastering these is the first step in becoming a proficient React developer.  
+Well done. The functionalities used throughout this exercise are the very pillars of the realm of React, and mastering these is the first step in becoming a proficient React developer.  
 
 If you have time on your hands, I encourage you to go through the exercise again and try to accomplish as much as you can without checking the documentation!
 

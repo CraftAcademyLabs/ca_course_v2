@@ -32,13 +32,13 @@ Enough talk - let's go and... find ourselves?
 
 Let's call this `getCurrentPosition` with a `console.table` as the callback.
 
-**image: prerequisites_01**
+![](../../images/weather_app/prerequisites_01.png)
 
 If you have given your browser access to your location, you should get a similar table containing your latitude and longitude.
 
 Let's play around with this a bit more and attempt to extract the data even further:
 
-**image: prerequisites_02**
+![](../../images/weather_app/prerequisites_02.png)
 
 ## Postman
 Cool, so now we are familiar with the two APIs, have our own API keys, and we also got our `lat` and `long`. 
@@ -49,9 +49,9 @@ For this purpose, we use a software called Postman. It's a handy tool for carryi
 So go ahead and download that and try to use what you've learned so far to receive some sweet data. Could look something like this:
 
 *An API call to Open Cage:*  
-**image: prerequisites_03**
+![](../../images/weather_app/prerequisites_03.png)
 
 *An API call to Open Weather:*   
-**image: prerequisites_04**
+![](../../images/weather_app/prerequisites_04.png)
 
 In Postman you can save both the requests and the responses for later use. For your convenience, go ahead and save your responses because - **spoiler alert** - we'll use those in the next chapters to create something called a `fixture`!
