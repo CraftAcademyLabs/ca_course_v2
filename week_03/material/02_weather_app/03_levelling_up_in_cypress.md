@@ -1,4 +1,4 @@
-It's time to get a bit more serious with Cypress. As mentioned, we'll be working with something called *stubbing* and *mocking*, which equals to `cy.stub` and `cy.router` in Cypress-language. 
+It's time to get a bit more serious with Cypress. As mentioned, we'll be working with something called *stubbing* and *mocking*, which equals to `cy.stub()` and `cy.intercept()` in Cypress-language. 
 
 They may seem intimidating at first, but you'll become friends soon enough, don't worry. Let's try to take it as we go and practice some **learning by doing**.
 
@@ -8,30 +8,33 @@ Before we start playing around with the new concepts, we need to write some stan
 And can you think of a better way to get the ball rolling than by writing a User Story? I think not:
 ```
 As a user
-In order to better be able to plan my day
+In order to be able to plan my day
 I want to see the temperature for my current location 
 ```
 As for the visual part, there's not that much to this one; we want an app to render an element that displays the temperature - as well as the user's location, ideally. 
 
 A test for this functionality is also pretty straight forward:
-```
-describe("displays weather info for user's location", () => {
 
-  it('on initial render', () => {
+```js
+describe("weather info for user's location", () => {
+  it('is expected to be displayed on initial render', () => {
     cy.visit('/')
-    cy.get('[data-cy="weather-display"]').within(() => {
-      cy.get('[data-cy="temp"]').should('contain', '17°C')
-      cy.get('[data-cy="location"]').should('contain', 'Virum')
+    cy.get('[data-cy=weather-display]').within(() => {
+      cy.get('[data-cy=temp]').should('contain', '17°C')
+      cy.get('[data-cy=location]').should('contain', 'Virum')
     })
   })
 })
 ```
 
-This may or may not be new to you, but in this challenge we'll be using `data-cy` as reference points.  
+This may or may not be new to you, but in this challenge we'll be using `data-cy` as reference points. 
+
 
 Cypress sees this way of referencing as best practice since its sole purpose is to work as an access point for your tests. Using classes, ids, or other element selectors are subject to potential changes in your implementation code. Maybe you (or another developer even) decide that the `header` element shouldn't have a `class='header'`, but instead an `id='hero-section'`. This will cause the tests to fail and cause commotion. 
 
 So, while we have to add an extra attribute to our elements, it might help us further down the line when we go back to the code and revise - or hand the code over to another team.
+
+Please see [this guide](https://docs.cypress.io/guides/references/best-practices#How-It-Works) for a good intro to best-practices for this.   
 
 Also, here's the celsius symbol: `°C`. 
 

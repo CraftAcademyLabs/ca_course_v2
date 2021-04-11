@@ -8,7 +8,7 @@ Let's go through the control flow one more time:
 Maintaining an overview like this is good practice to avoid getting stuck and keeping an efficient work flow throughout. With that said, let's get on with it!
 
 ## Getting user's position
-As we have practiced previously, when we want to display information on our site's initial render that is based on API calls, we can use `componentDidMount()`. 
+As we have practiced previously, when we want to display information on our site's initial render that is based on API calls, we can use the life cycle event function: `componentDidMount()`. 
 
 **Define a state to contain the user's position, and, other than that, it's just carrying out the same code as we did back in *Prerequisites*.**
 
