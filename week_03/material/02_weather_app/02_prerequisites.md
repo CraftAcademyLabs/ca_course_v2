@@ -8,7 +8,22 @@ Right, cool.. Let's dive in!
 It's our intention to build a web app that displays the user's weather conditions as well as their location. Since we're actually not meteorologists (I was just pretending **:(** ), we'll have to leverage on data that other people have acquired. 
 
 ### Open Weather Map
-A great source for weather data is the Open Weather API, so go and explore their website a bit. In this challenge, we will be using their [one-call-api](https://openweathermap.org/api/one-call-api).  
+A great source for weather data is the Open Weather API, so go and explore their website a bit. 
+
+![](../../images/weather_app/browser_open_weather_map_website.png)
+
+In this challenge, we will be using their [one-call-api](https://openweathermap.org/api/one-call-api).
+
+One Call API provides us with:
+
+* Make one API call and get current, forecast and historical weather data
+* Minute forecast for 1 hour
+* Hourly forecast for 48 hours
+* Daily forecast for 7 days
+* Historical data for 5 previous days
+* National weather alerts
+
+It is far more than we need, but hey, aim for the start and you'll reach the treetops..., right?
 
 Take a closer look at the API call structure. One of the `params` require an `appid`, which you can get by creating an account - so go ahead and do that. 
 
@@ -16,6 +31,8 @@ Take a closer look at the API call structure. One of the `params` require an `ap
 Ideally, the Open Weather API would also provide us with some sort of location data, but, alas, it doesn't. 
 
 So for the location, we'll be using the [Open Cage API](https://opencagedata.com/api). This, too, requires a personal key, so make an account here as well. 
+
+![](../../images/weather_app/browser_open_cage_landing_page.png)
 
 Now, looking at both the API calls, you should notice that `lat` and `long` are also required `query params`. But since these will depend on the user, how do we access these values dynamically?
 

@@ -45,41 +45,42 @@ $ touch cypress/fixtures/location_response.json
 As for the content; remember when I said it was a good idea to save your responses in Postman? Now is exactly when that comes in handy. Copy your saved responses into the respective fixtures. The beginnings should look something like this:
 
 *location_response.json:*
-```
+```json
 {
   "documentation": "https://opencagedata.com/api",
   "licenses": [
-      {
-          "name": "see attribution guide",
-          "url": "https://opencagedata.com/credits"
-      }
+    {
+      "name": "see attribution guide",
+      "url": "https://opencagedata.com/credits"
+    }
   ],
   "rate": {
-      "limit": 2500,
-      "remaining": 2499,
-      "reset": 1617062400
+    "limit": 2500,
+    "remaining": 2498,
+    "reset": 1612396800
   },
   "results": [
-      {
-          "annotations": {
-              "DMS": {
-                  "lat": "55° 47' 2.90400'' N",
-                  "lng": "12° 27' 6.24960'' E"
+    {
+      "annotations": {
+        "DMS": {
+          "lat": "55° 47' 2.90400'' N",
+          "lng": "12° 27' 6.24960'' E"
+        },
   // ...
 ```
 *weather_response.json:*
-```
+```json
 {
   "lat": 55.7842,
   "lon": 12.4518,
   "timezone": "Europe/Copenhagen",
-  "timezone_offset": 7200,
+  "timezone_offset": 3600,
   "current": {
-      "dt": 1617012886,
-      "sunrise": 1616993313,
-      "sunset": 1617039664,
-      "temp": 9.04,
-  // ...
+    "dt": 1612352237,
+    "sunrise": 1612335617,
+    "sunset": 1612367263,
+    "temp": 9.04,
+    // ...
 ```
 Awesome! With Cypress satisfied, it's (finally) time to display something on the screen!
 
@@ -93,6 +94,15 @@ This raises a philosophical question - should I revise the test or change the `f
 I would personally argue that once we make an assertion in our test, we should do everything to see it through (unless there's a change in the logic, of course).
 
 So I'll go ahead and change the `fixture`.
+
+```json
+"current": {
+    "dt": 1612352237,
+    "sunrise": 1612335617,
+    "sunset": 1612367263,
+    "temp": 22,
+    // ...
+```
 
 **That should pretty much do it!**
 
