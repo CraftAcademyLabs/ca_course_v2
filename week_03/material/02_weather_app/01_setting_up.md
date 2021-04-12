@@ -14,7 +14,7 @@ Furthermore, we'll be looking into a few more advanced testing techniques in Cyp
 - Further knowledge of styling with Semantic UI
 
 ## Scaffolding
-Before we pull up in our meterological uniforms, we should set up our code base. You've been through this a few times now, so I'll spare you the tedious walk-through. 
+Before we pull up in our meteorological uniforms, we should set up our code base. You've been through this a few times now, so I'll spare you the tedious walk-through. 
 
 A small bullet list should suffice:
 
