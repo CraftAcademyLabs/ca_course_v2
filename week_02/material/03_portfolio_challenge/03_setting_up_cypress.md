@@ -98,15 +98,28 @@ You can define your behaviors in a `beforeEach` within any of the `cypress/suppo
 
 Alright, let’s move on, as mentioned previously, we need to have a server running to use Cypress.
 
-We need to add a script in the package.json file.
+As for configuring the scripts and the server, there's a myriad of ways to set up our local server. We have found the ```start-server-and-test``` helper package to be a convenient solution that works great with React.
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/9r8GRS3MQQ6BCEPGOrmW)
+```
+$ yarn add start-server-and-test --dev
+``` 
 
-The script we added will run the script that starts the server and open up `Cypresss`.
+Go to ```package.json``` and add the following lines to the ```scripts``` section: 
+```json
+"scripts": {
+  //...
+  "start:silent": "BROWSER=none react-scripts start",
+  "cy:open": "cypress open",
+  "cypress": "start-server-and-test start:silent http://localhost:3000/ cy:open"
+}
+```
+You can add the lines anywhere inside the ```scripts``` object, just remember to end each line with a comma - except for the very last line!  
+
+The scripts we added will start a server and open up `Cypress`.
 
 So in your terminal you can run:
 ```
-$ yarn cy:open
+$ yarn cypress
 ```
 
 We have now successfully added `Cypress`.
