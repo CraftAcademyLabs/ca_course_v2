@@ -15,17 +15,8 @@ As for the visual part, there's not that much to this one; we want an app to ren
 
 A test for this functionality is also pretty straight forward:
 
-```js
-describe("weather info for user's location", () => {
-  it('is expected to be displayed on initial render', () => {
-    cy.visit('/')
-    cy.get('[data-cy=weather-display]').within(() => {
-      cy.get('[data-cy=temp]').should('contain', '17°C')
-      cy.get('[data-cy=location]').should('contain', 'Virum')
-    })
-  })
-})
-```
+
+![](../../images/weather_app/levelling_up_in_cypress_001.png)
 
 This may or may not be new to you, but in this challenge we'll be using `data-cy` as reference points. 
 
