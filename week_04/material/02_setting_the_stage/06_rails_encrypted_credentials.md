@@ -59,7 +59,7 @@ The key value pair we added to the credentials file is available for us to use i
 
 ```
 $ rails c
-Loading development environment (Rails 5.2.0.rc1)
+Loading development environment (Rails 6.1.1)
 [1] pry(main)> Rails.application.credentials.foo[:bar]
 => "foo-bar"
 [2] pry(main)> Rails.application.credentials[:monkeylearn_key]
