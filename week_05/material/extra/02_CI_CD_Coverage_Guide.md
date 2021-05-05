@@ -176,7 +176,7 @@ To start with we need to create a script for Semaphore to utilize. In your local
 Make sure this is pushed up to the repo before you proceed.
 
 ### Workflow for Cypress
-We'll be using a different workflow for the client. 
+We'll also be using a different workflow for the client. 
 
 - In the box to the left, search for `yarn` or scroll all the way to the bottom. 
 
