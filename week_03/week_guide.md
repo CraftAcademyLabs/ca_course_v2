@@ -80,13 +80,14 @@ Visualisation of data with ChartJS
     - [ ] Ue a express.js example to showcase the 3 kind of params we are taalking about. [Sample code](https://github.com/CraftAcademyLabs/params_talk_code)
 
 - **Thursday:**
+   - Make sure to continue deliver the 1-on-1's
      
-   - [ ] Afternoon: Software Craftsmanship - Thomas (Noel)
+   - [ ] Afternoon: Software Craftsmanship - Thomas
      - [ ] [Slides](https://docs.google.com/presentation/d/1MtC_9wUgQAO4NUvAQxFk7CU7Fvdbwt4RE2BDaMC_f8s/edit)
 
 - **Friday:**
 
-  - [ ] Afternoon: Introduce the Weekend Challenge - Emma 
+  - [ ] Afternoon: Introduce the Weekend Challenge - Thomas 
     - [ ] [Slides TO BE ADDED]
     
   - [ ] Afternoon: Introduce the RPS - Thomas
