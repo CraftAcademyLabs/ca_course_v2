@@ -1,67 +1,57 @@
 
 ## Setting up Continous integration with Semaphore
 
-Visit the Semaphore classic, make sure that you are not on Semaphore 2s [website](https://semaphoreci.com/). 
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/01_semaphore-pick-classic.png)
-- If you don't already have an account, set one up with Github
-- First thing, we need to make sure that we are using the latest version of Ruby that Semaphore supports
-- Go [Here](https://classic-docs.semaphoreci.com/docs/languages/ruby/ruby-support-on-semaphore.html) to see which version to use
-- Then go to your `.ruby-version` file to make sure that you are using the `Ruby version` that Semaphore supports
-- _If you are using the same version as the latest one Semaphore supports, then jump to the step where you add a new project_
-- If you have a different `Ruby version` on your project, then change it in your `.ruby-version` file and `Gemfile` 
-- For example, if the latest `Ruby version` that Semphore supports is `ruby 2.5.1` then it should look like this: 
-```
-# .ruby-version
+Visit the Semaphore's [website](https://semaphoreci.com/). 
 
-ruby-2.5.1
-```
-```
-# Gemfile
+![](../images/semaphore_landing_page.png)
 
-ruby '2.5.1'
-```
-- After changing `Ruby version`, delete your `Gemfile.lock`
-- Then you need to install the correct version and change to that version:
-```
-$ rvm install the_ruby_version_you_changed_to
-```
-```
-$ rvm use the_ruby_version_you_changed_to
-```
-- And then you need to reinstall your dependencies with the new `Ruby version`:
-```
-$ bundle
-```
-- Now you are all set with your new `Ruby version` and should `commit` and `push` up to your repo before continuing.  
+If you don't already have an account, set one up with Github
 
-- Click the button to add a new project
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/02_semaphore-add-project.png)
-- Find the repo (`rails_demo`) you want to add CI to in the list which shows your own repositories
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/03_semaphore-select-repo.png)
-- When they ask you who is supposed to own this project, pick `Craft Academy` if you can.
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/05_select-owner.png)
-- After you selected the repo you want to use you should be able to set which branch we want CI for, usually the development branch but in your case we want to pick the master branch. The branch you will merge feature branches in to.
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/04_semaphore-select-branch.png)
-- After you have selected the branch and semaphore has analyzed the project, you are presented by some options.
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/06_semaphore_analyzing-repo.png)
-- You usually don't have to change the `Language`, but make sure that the `database.yml` option is set to `pg` and that you choose the `Ruby version` that you set up before.
+While signing up you might be blocked by an 'abusive-filter'. If this is the case, you'll have to send a mail to that specified address in the error message. Make sure to include your GitHub email in that message!   
 
-- First off delete both of the jobs, we only want the setup.
+### Setting up a new project
+- Click the "Create new" button and then "Choose repository".
 
-- Edit the setup and put this in there
+![](../images/semaphore_dashboard.png)
+
+- At this stage you should have been prompted to give Semaphore access to your GitHub account. If by some reason you still don't see any repos, go to your profile settings up in the right corner and check permissions. If your Public repos are indeed connected, but you still don't see anything - contact a coach!
+- Proceed to select the repo you want to use.
+
+![](../images/semaphore_choose_repo.png)
+
+### Workflow
+
+- Now we need to configure the test environment. Choose the "Ruby on Rails" starter workflow and then click "Looks good, start". 
+- Semaphore has issues when we click Customize before the workflow has been run the first time, so use this flow even if you know you want to customize the configurations.
+
+![](../images/semaphore_workflow.png)
+
+- This will start the testing automatically, but we need to tweak the config a bit, so stop the test and click "Edit Workflow"
+
+![](../images/semaphore_edit.png)
+
+Inside the Jobs container, replace the content with this:
+
 ```
-nvm install 13.7.0
-nvm use 13.7.0
-gem update --system
-gem install bundler
-bundle install --path vendor/bundle
-yarn
-bundle exec rails db:setup --all db:migrate
-bundle exec rails db:test:prepare
+checkout
+sem-service start postgres 11
+sem-version ruby 3.0.0
+cache restore
+bundle install --deployment --path vendor/bundle
+cache store
+bundle exec rake db:setup
 COVERALLS_REPO_TOKEN=your_coveralls_token bundle exec rails ci:tests
 ```
-- Make sure to get the repo token from coveralls project and reålace the placeholder in the code example.
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/07_semaphore-project-settings.png)
-- Now go ahead and build with these settings. ![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/08_semaphore-build-with-settings.png)
-- You have now successfully added CI with semaphore to your project. Don't worry if it does not go green now from the start.
-![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/09_semaphore-complete.png)
+
+Change `sem-version ruby` to your local ruby version and replace the coveralls placeholder with your token.
+
+Now "Run this workflow" which should initiate a new test run. If you have any strange errors here, contact a coach.
+
+![](../images/semaphore_new_settings.png)
+
+- And voila!
+
+![](../images/semaphore_successful.png)
+
+
+
