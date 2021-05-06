@@ -164,6 +164,10 @@ Now "Run this workflow" which should initiate a new test run. If you have any st
 
 This process will create a PR to the chosen repo. Make sure to get this PR merged (by you or the coaches) and then pull down to your local project to make sure the added ``.yml`` file will be added in future PRs.
 
+Now, as the final thing, head over to the project's settings tab, scroll down and make sure to tick in these two checkboxes. Just go with the default settings of the "Forked pull requests".
+
+![](../../../week_04/material/images/semaphore_PR.png)
+
 ## For the client
 The config looks a bit different for the client. 
 
@@ -194,7 +198,7 @@ yarn cy:integrate
 
 ![](../images/semaphore_client_config.png)
 
-And that should do it for the client! 
+Remember to change the build settings for pull requests - and that should do it for the client! 
 
 # Setting up Continous Deployment with Heroku
 

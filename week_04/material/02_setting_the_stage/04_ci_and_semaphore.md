@@ -53,5 +53,9 @@ Now "Run this workflow" which should initiate a new test run. If you have any st
 
 ![](../images/semaphore_successful.png)
 
+This process will create a PR to the chosen repo. Make sure to get this PR merged (by you or the coaches) and then pull down to your local project to make sure the added ``.yml`` file will be added in future PRs.
 
+Now, as the final thing, head over to the project's settings tab, scroll down and make sure to tick in these two checkboxes. Just go with the default settings of the "Forked pull requests".
+
+![](../images/semaphore_PR.png)
 
