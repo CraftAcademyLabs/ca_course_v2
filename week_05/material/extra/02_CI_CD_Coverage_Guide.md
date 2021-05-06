@@ -108,8 +108,6 @@ If you recently added coveralls to the repository you will be presented by the c
 At this stage we need to set up CI for both the client and the api.
 ## For the API
 
-## Setting up Continous integration with Semaphore
-
 Visit the Semaphore's [website](https://semaphoreci.com/). 
 
 ![](../../../week_04/material/images/semaphore_landing_page.png)
