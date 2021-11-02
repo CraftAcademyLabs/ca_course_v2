@@ -15,7 +15,7 @@ CREATE TABLE authors (
 );
 ```
 
-And add a foreign key to the ´books` table: 
+And add a foreign key to the `books` table: 
 ```sql
 ALTER TABLE books ADD COLUMN author_id INTEGER;
 ALTER TABLE books ADD CONSTRAINT fk_author_books FOREIGN KEY (author_id) REFERENCES authors (id);
@@ -67,7 +67,7 @@ UPDATE books SET author_id = (SELECT id FROM authors WHERE authors.name = 'A. Li
 (1 row)
 ```
 
-We have to repeat this for every row in our `books` table. You can, if you want alter this statement to ise `id` instead of `name` and `title`. Also, please note that we added `RETURNING *` at the end of the query. Try removing that to figura out what it does for us....
+We have to repeat this for every row in our `books` table. You can, if you want, alter this statement to use `id` instead of `name` and `title`. Also, please note that we added `RETURNING *` at the end of the query. Try removing that to figure out what it does for us...
 
 In the end, your `books` table should only have rows that include a reference to the `authors` table. 
 
@@ -82,7 +82,7 @@ books_api=> SELECT * FROM books;
 (4 rows)
 ```
 
-Well, with this query, we will not get the name of the author. That is not wat we want. Try this query insted: 
+Well, with this query, we will not get the name of the author. That is not what we want. Try this query instead: 
 
 ```sql
 books_api=> SELECT books.id, books.title, authors.name 
@@ -127,7 +127,7 @@ And if we now take a closer look at that table, we should see that the constrain
 
 ![](images/08_2_table_description_4.png)
 
-This means that if we try to INSERT an author that alseady exists, we will get an error:
+This means that if we try to INSERT an author that already exists, we will get an error:
 
 ```sql
 books_api=> INSERT INTO authors (name) VALUES ('T. Ochman');
@@ -144,7 +144,7 @@ INSERT INTO authors (name) VALUES ('T. Ochman') ON CONFLICT (name) DO NOTHING RE
 (0 rows)
 ```
 
-Now, the problem with this is that we WILL need the id of the author if we want to be able to Insert a row inot the `books` table. Hmm... How about this?
+Now, the problem with this is that we WILL need the id of the author if we want to be able to Insert a row into the `books` table. Hmm..., how about this?
 
 ```sql
 books_api=> INSERT INTO authors (name) VALUES ('T. Ochman') ON CONFLICT (name) DO UPDATE SET name = excluded.name RETURNING id;
@@ -154,7 +154,7 @@ books_api=> INSERT INTO authors (name) VALUES ('T. Ochman') ON CONFLICT (name) D
 (1 row)
 ```
 
-Okay, so this will help us construct a query that will add a book with a reference to ann author. It could look something like this: 
+Okay, so this will help us construct a query that will add a book with a reference to an author. It could look something like this: 
 
 ```sql
 WITH authors AS (INSERT INTO authors (name) VALUES ('T. Ochman') ON CONFLICT (name) DO UPDATE SET name = excluded.name  RETURNING id)
