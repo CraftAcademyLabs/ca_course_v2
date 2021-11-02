@@ -2,7 +2,7 @@
 
 What if...?
 
-What if we would like to alter our database and add a relationship that would allow a BOOK to `belong_to` an AUTHOR, and allow an AUTHOR to `have_many` BOOKS? That would open up for some more interesting functionality and a better data structure. 
+What if we would like to alter our database and add a relationship that would allow a BOOK to `belong_to` an AUTHOR, and allow an AUTHOR to `have_many` BOOKS? That would open up for some interesting functionality and a better data structure. 
 
 We can run some experiments in the console to learn about what kind of queries we need to use.
 
@@ -69,7 +69,7 @@ UPDATE books SET author_id = (SELECT id FROM authors WHERE authors.name = 'A. Li
 
 We have to repeat this for every row in our `books` table. You can, if you want alter this statement to ise `id` instead of `name` and `title`. Also, please note that we added `RETURNING *` at the end of the query. Try removing that to figura out what it does for us....
 
-At the end your `books` table should only have rows that include a reference to the `authors` table. 
+In the end, your `books` table should only have rows that include a reference to the `authors` table. 
 
 ```sql
 books_api=> SELECT * FROM books;
@@ -113,9 +113,9 @@ WHERE books.author_id = (SELECT id FROM authors WHERE authors.name = 'T. Ochman'
 (2 rows)
 ```
 
-**Don't you just LOVE a good old fashined Object Relational Mapper now?**
+**Don't you just LOVE a good old-fashioned Object Relational Mapper now?**
 
-Okay, but let's say we hava a parameter of a title and author name sent to us and we have to update both the `books` table and the `authors` table? 
+Okay, but let's say we have a parameter of a title and author name sent to us and we have to update both the `books` table and the `authors` table? 
 
 We would need to add a validation to the `authors` table to make sure that the name is unique. 
 
@@ -203,7 +203,7 @@ ORDER BY books.id ASC;
 (5 rows)
 ```
 
-We are only scratching the surface of what we can do in SQL, but I'd say it again: **Don't you just LOVE a good old fashined Object Relational Mapper now?**
+We are only scratching the surface of what we can do in SQL, but I'd say it again: **Don't you just LOVE a good old-fashioned Object Relational Mapper now?**
 
 Let's put these queries to use in our application.
 
