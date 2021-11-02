@@ -60,7 +60,7 @@ Initiate a new app using Yarn and create the following files:
 
 -   `.env` - file containing environment variables (does not get version controlled)
 -   `package.json` - information about the project and dependencies
--   `init.sql` - file to initialize PostgreSQL table
+-   `init.sql` - file to initialize PostgreSQL table (**OPTIONAL. Only used if we deploy this app to a remote server.**  )
 -   `config.js` - will create the database connection
 -   `app.js` - the Express server
 ```
@@ -112,14 +112,20 @@ require('dotenv').config()
 const { Pool } = require('pg')
 const isProduction = process.env.NODE_ENV === 'production'
 
-const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`
+const user = process.env.DB_USER
+const password = process.env.DB_PASSWORD
+const host = process.env.DB_HOST
+const port = process.env.DB_PORT
+const database = process.env.DB_DATABASE
+
+const connectionString = `postgres://${user}:${password}@${host}:${port}/${database}`
 
 const pool = new Pool({
   connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
   ssl: isProduction,
 })
 
-module.exports = { pool }
+module.exports = pool
 ```
 ## Test the connectivity
 
@@ -133,12 +139,12 @@ Type ".help" for more information.
 >
 ```
 Then we want to load the db configuration:
-```
-> const { pool } = require('./config.js')
+```js
+> const pool = require('./config.js')
 undefined
 ```
 We also want to take a closer look at what `pool` is:
-```
+```js
 > pool
 BoundPool {
   _events: [Object: null prototype] {},
@@ -162,7 +168,7 @@ BoundPool {
 }
 ```
 We now want to query the db for all rows in the `books` table:
-```
+```js
 > pool.query('SELECT * FROM books', (error, results) => { error ? console.log(error) : console.table(results.rows) })
 undefined
 > ┌─────────┬────┬────────────────┬────────────────────────────────────────┐
@@ -179,7 +185,7 @@ Now, IF there is an error, you will NOT see the table, but rather the error mess
 In order to be able to create an instance of a book in our code, we want to experiment with some SQL in our `node` console.
 
 Once again, open your terminal and open up the console:
-```
+```js
 $ node
 Welcome to Node.js v13.1.0.
 Type ".help" for more information.
@@ -187,11 +193,11 @@ Type ".help" for more information.
 undefined
 ```
 Now, that we have the `pool` available, we can try to use the `INSERT` command and write a new book in out table. Execute this JavaScript code in you console.
-```
+```js
 > pool.query('INSERT INTO books (author, title) VALUES ($1, $2)', ['T. Ochman', 'Getting Started With NodeJS'], error => {})
 ```
 If we now query the database for all books, we should see a new row.
-```
+```js
 > pool.query('SELECT * FROM books', (error, results) => { error ? console.log(error) : console.table(results.rows) })
 undefined
 > ┌─────────┬────┬────────────────┬────────────────────────────────────────┐
@@ -209,15 +215,15 @@ Next, we will create our endpoints. We will only set up enpoints for listing a c
 **index.js**
 ```javascript
 const express = require('express')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const { pool } = require('./config')
 
 const app = express()
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+app
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  .use(cors({ credentials: true, origin: ["http://localhost:3474"] }));
 
 const getBooks = (request, response) => {
   pool.query('SELECT * FROM books', (error, results) => {

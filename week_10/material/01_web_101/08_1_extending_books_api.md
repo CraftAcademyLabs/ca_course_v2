@@ -1,20 +1,21 @@
 
 We want to extend our Books API and Client with a bit of functionality that will make use of a cookie to store information that we can use to identify a user.
 
-But first things first. Lets start with adding a new table to our databaste to store user info. We will keep it real simple and give out user ane attribute: `user_name`.
+But, first things first. Let's start with adding a new table to our databaste to store user info. We will keep it real simple and give out user ane attribute: `user_name`.
 
 Log in to `psql`, connect to the `books_api` database ans att a table:
-```
+```sql
  $ psql -d postgres -U api_user
 psql (11.2)
 Type "help" for help.
 
-CREATE TABLE users ( ID SERIAL PRIMARY KEY, 
-user_name VARCHAR(255) NOT NULL);
+CREATE TABLE users ( 
+  ID SERIAL PRIMARY KEY, 
+  user_name VARCHAR(255) NOT NULL);
 CREATE TABLE
 ```
 With this addition, our database have two tables. We can easily check that in the psql console:
-```
+```sql
 postgres=> \dt
          List of relations
  Schema | Name  | Type  |  Owner   
@@ -24,23 +25,23 @@ postgres=> \dt
 (2 rows)
 ```
 We also need to add an entry to the `users` table:
-```
+```sql
 INSERT INTO users (user_name) VALUES ('Thomas');
 ```
 And check if the user was saved by querying the table:
-```
+```sql
 postgres=> SELECT * FROM users;
  id | user_name 
 ----+-----------
   1 | Thomas
 (1 row)
 ```
-Let's shift out focus to the ExpressJS application and modify our current implementation to the the following:
+Let's shift out focus to our application and modify our current implementation with the following:
 
 1.  Set a cookie every time a request to the backend will be made, with the id of our user (it will be `1` in our case), and call it `uid`. For security reasons, we will used a signed cookie.
 2.  Make use of that cookie when we create a new book listing and require its presence before we actually write to the `books` table.
 
-This process is supposed to mimic a sort of authentication flow, where the identity of the user is passed around in the request - response cycle using cookis. Not an uncommaon practice.
+This process is supposed to mimic a sort of authentication flow, where the identity of the user is passed around in the request - response cycle using cookis. Not an uncommon practice.
 
 Chagne the configuration ofthe `app.js` to include `cookie-parser` and add the basic cookie configuration:
 ```javascript
@@ -59,7 +60,7 @@ We also need to modify `cors` settings to allow origins where the request can co
 ```javascript
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:3474'] //  the devault port that will be used with superstaic server (see comments below)
+  origin: ['http://localhost:3474'] //  the default port that will be used with superstaic server (see comments below)
 }))
 ```
 Next, we will have to make sure that the cookie is added to our response in `getBooks`:
