@@ -40,9 +40,7 @@ import Greeting from "./components/Greeting";
 
 const App = () => {
   return (
-    <div>
-      <Greeting />
-    </div>
+    <Greeting />
   );
 };
 
@@ -54,10 +52,10 @@ import React from 'react'
 
 const Greeting = () => {
   return (
-    <div>
+    <>
       <h1>Hello</h1>
       <h2>This is in English</h2>
-    </div>
+    </>
   )
 }
 
@@ -75,6 +73,8 @@ Let's go over the packages we are adding
 
 -   `i18next` : internationalization-framework written in and for JavaScript
 -   `react-i18next` : internationalization-framework for React.js which is based on i18next
+  
+Optional
 -   `i18next-browser-languagedetector` : language detection plugin use to detect user language in the browser
 -   `i18next-xhr-backend` : Plugin for detecting and use language files 
 
@@ -96,9 +96,9 @@ const availableLanguages = ['en', 'sv'];
  i18n
   .use(Backend) // load translation using xhr -> in the /public/locales.
 
-   .use(LanguageDetector) // detect user language
+   .use(LanguageDetector) // detect user language (optional)
 
-   .use(initReactI18next) // pass the i18n instance to react-i18next.
+   .use(initReactI18next) // pass the i18n instance to react-i18next. (optional)
 
    .init({
     fallbackLng, // if user computer language is not on the list of available languages, than we will be using the fallback language specified earlier
@@ -109,6 +109,35 @@ const availableLanguages = ['en', 'sv'];
       escapeValue: false
     },
   });
+export default i18n;
+```
+
+Another (simplified) version of this file: 
+
+```js
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import en from "./locales/en";
+import sv from "./locales/sv";
+
+const resources = {
+  sv: sv,
+  en: en,
+};
+
+const fallbackLng = "en";
+
+i18n.use(initReactI18next).init({
+  resources,
+  fallbackLng: fallbackLng,
+  interpolation: {
+    escapeValue: false,
+  },
+  react: {
+    useSuspense: true,
+  },
+});
+window.i18n = i18n;
 export default i18n;
 ```
 In order to make the configuration file available to our app we need to import it to our `index.js`
@@ -122,7 +151,14 @@ Create your localization files
 ```
 $ touch public/locales/sv/translation.json  
 $ touch public/locales/en/translation.json
-```   
+```  
+
+Or, if you don't use `Backend` in your `i18n.js` (the simplified varsion above), create those files in your `src` folder instead as `.js` files.
+
+```
+$ touch src/locales/sv.js  
+$ touch src/locales/en.js
+```
 
 #### Suspense
 It takes a few milliseconds for the language files to load. We will use a built-in React function called Suspense. This function will wait until the language files have loaded. Otherwise, it will display something that we want to display. We will add it to our `App.jsx` component.
@@ -133,11 +169,9 @@ import React, { Suspense } from "react";
 
 const App = () => {
   return (
-    <div>
-      <Suspense fallback={<div>Loading</div>}>
-        <Greeting />
-      </Suspense>
-    </div>
+    <Suspense fallback={<div>Loading</div>}>
+      <Greeting />
+    </Suspense>
   );
 };
 
@@ -156,10 +190,10 @@ const Greeting = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <>
       <h1>{t('title')}</h1>
       <h2>{t('sub-title')}</h2>
-    </div>
+    </>
   );
 }
 
@@ -178,9 +212,33 @@ And the Swedish translations `public/locales/sv/translation.json`
 ```json
 {
   "title": "HEJ",
-  "sub-title": "Detta e svenska"
+  "sub-title": "Detta är svenska"
 }
 ```
+Or, if you don't use `Backend` in your `i18n.js` (the simplified varsion above):
+
+```js
+const en = {
+  translation: {
+    title: "Hello",
+    "sub-title": "This is in English",
+  },
+};
+export default en;
+
+```
+
+```js
+const sv = {
+  translation: {
+    title: "HEJ",
+    "sub-title": "Detta är svenska",
+  },
+};
+export default sv;
+
+```
+
 If you run `yarn start` in your terminal and visit `localhost:3000` you will see the application in Swedish (if you are based in Sweden and if you language settings are set to Swedish in the browser). But if you open an incognito window and visit `localhost:3000` you will see it in English.
 
 Success!! 
@@ -197,17 +255,15 @@ import i18n from "./i18n"; // Import the configurations
 
 const App = () => {
   return (
-    <div>
-      <Suspense fallback={<div>Loading</div>}>
+    <Suspense fallback={<div>Loading</div>}>
+    
+    // Add the button with the changeLanguage function and specify the language 
+      <button onClick={() => {i18n.changeLanguage("en")}}>English</button>
       
-      // Add the button with the changeLanguage function and specify the language 
-        <button onClick={() => {i18n.changeLanguage("en")}}>English</button>
-        
-      // Swedish as well 
-        <button onClick={() => {i18n.changeLanguage("sv")}}>Swedish</button>
-        <Greeting />
-      </Suspense>
-    </div>
+    // Swedish as well 
+      <button onClick={() => {i18n.changeLanguage("sv")}}>Swedish</button>
+      <Greeting />
+    </Suspense>
   );
 };
 

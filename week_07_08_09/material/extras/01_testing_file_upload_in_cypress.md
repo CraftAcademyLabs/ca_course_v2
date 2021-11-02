@@ -57,11 +57,11 @@ describe("Journalist can", () => {
     cy.get("#new-article-form").within(() => {
       cy.get("#title").type("This is a title");
       cy.get("#content").type("This is some awesome content");
-      cy.file_upload('img.jpeg', '#image-upload', 'image/jpeg');
+      cy.file_upload('img.jpeg', '[data-cy=image-upload]', 'image/jpeg');
     });
 
-    cy.get("#create-article-button").click();
-    cy.get("#message").should(
+    cy.get("[data-cy=create-article-button]").click();
+    cy.get("[data-cy=[message]").should(
       "contain",
       "Your article was successfully created"
     );
@@ -119,15 +119,15 @@ const CreateArticle = () => {
 
   return (
     <>
-      <form id="new-article-form" onSubmit={(event) => submitArticle(event)}>
-        <input id="title" placeholder="Title" name="title" />
-        <input id="content" placeholder="Content" name="content" />
-        <input id="image-upload" name="image" type="file"/>
-        <button id="create-article-button" type="submit">
+      <form data-cy="new-article-form" onSubmit={(event) => submitArticle(event)}>
+        <input data-cy="title" placeholder="Title" name="title" />
+        <input data-cy="content" placeholder="Content" name="content" />
+        <input data-cy="image-upload" name="image" type="file"/>
+        <button data-cy="create-article-button" type="submit">
           Create Article
         </button>
       </form>
-      {message && <p id="message">{message}</p>}
+      {message && <p data-cy="message">{message}</p>}
     </>
   );
 }
