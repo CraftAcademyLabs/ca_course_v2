@@ -5,7 +5,7 @@ The midcourse exam is currenly a frontend implementation of a github user search
 ---
 
 - Does the code run according to spec?
-- Is the code formatted consitantly?
+- Is the code formatted consistently?
 - Testing in Cypress:
   - Do the tests stub out the API calls correctly?
   - Do the tests account for a sad path?
