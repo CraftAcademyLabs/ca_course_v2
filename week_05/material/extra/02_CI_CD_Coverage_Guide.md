@@ -1,14 +1,14 @@
-The following guide assumes that you have an upstream repository on Craft Academy's Github account, if that is not the case for you then just ignore the parts about adding the "Craft Academy repository" and set your repository there instead. It also assumes that you're using Rpsec for testing Ruby on Rails and Cypress for a React client
+The following guide assumes that you have an upstream repository on Craft Academy's Github account, if that is not the case for you then just ignore the parts about adding the "Craft Academy repository" and set your repository there instead. It also assumes that you're using RSpec for testing Ruby on Rails and Cypress for a React client.
 
-In this guide, we will show you how to set up three services that will work together, Semaphore, CD with Heroku and Coveralls.
+In this guide, we will show you how to set up three services that will work together, Semaphore, CD with Heroku and Code Climate.
 
-**Semaphore** is testing your code all the time and keeping software quality high. The premise of CI is to get feedback as early as possible because the earlier you get feedback, the fewer things cost to fix.
+**Semaphore** is testing your code all the time and keeping software quality high. The premise of CI is to get feedback as early as possible because the earlier you get feedback, the easier things become to fix.
 
-In software development, when multiple developers or teams are working on different segments of the same web application, we need to perform an integration test by integrating all modules. To do that an automated process for each piece of code is performed on a daily bases so that all your code gets tested.
+In software development, when multiple developers or teams are working on different segments of the same web application, we need to perform an integration test by integrating all modules. To do that an automated process for each piece of code is performed on a daily basis so that all your code gets tested.
 
 **Continuous Deployment with Heroku** is about getting code into production in an automated way. Things should be easy and repeatable. That’s where Continuous Deployment comes into play. The deployment should not be manual. Every time we add some new code to our application it should deploy that new code automatically.
 
-**Coveralls** is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered. You can use it for various programming languages and in this guide, we will use it for Ruby.
+**CodeClimate** is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered. You can use it for various programming languages and in this guide, we will use it for Ruby. In a later guide we will use it to measure code coverage in React.
 
 # Coverage with Coveralls
 Add the following gem to your `Gemfile` in the `:development` and `:test` group
