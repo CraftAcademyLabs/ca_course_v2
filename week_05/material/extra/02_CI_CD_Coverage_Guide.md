@@ -10,99 +10,36 @@ In software development, when multiple developers or teams are working on differ
 
 **CodeClimate** is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered. You can use it for various programming languages and in this guide, we will use it for Ruby. In a later guide we will use it to measure code coverage in React.
 
-# Coverage with Coveralls
-Add the following gem to your `Gemfile` in the `:development` and `:test` group
+# Coverage with Code Climate
+Code Climate can automatically track your coverage, but it relies on separate tools to do the actual analysis of how much of your code is being tested. Add the following gem to your `Gemfile` in the `:development` and `:test` group
 
 ```rb
 group :development,  :test  do
-  gem 'coveralls',  require:  false
+  gem 'simplecov',  require:  false
 end
 ```
 
 ``Run bundle install``
 
-Next, we need to add coveralls to our testing suite. Add the following lines at the top of the `rspec` configuration file
+Next, we need to add simplecov to our testing suite. Add the following lines at the top of the `rspec` configuration file
 
 ```rb
 # spec/rails_helper.rb for RSpec
 
-require  'coveralls'
-Coveralls.wear!('rails')
+require  'simplecov'
+SimpleCov.start
 ```
 
-Now whenever we run our tests, a coverage report will be generated.
+Now whenever we run our tests, a coverage report will be generated. *NB: Do not track this report in version control! You will need to add the following to your gitignore:*
+```
+# .gitignore
+
+coverage/
+```
 
 ----------
 
-### Merging multiple test suites results
 
-We need to prevent coveralls from sending data right after running each test.
-
-Instead, we want to wait until coverage has been merged before we send it off.
-
-For that, we’ll modify the configuration with the following
-
-instead of
-```
-Coveralls.wear!('rails')
-```
-we should use
-```
-Coveralls.wear_merged!('rails')
-```
-When you run your tests coveralls will create coverage reports in folder named `coverage`. We do not want to push that up to Github. Make sure you add `coverage/` to your `.gitignore`
-
-Then create a custom rake task that will run all your test suites then submit coverage results to coveralls.
-
-Create a new file `lib/tasks/ci.rake`
-
-```rb
-unless  Rails.env.production?
-  require  'rspec/core/rake_task'
-  require  'coveralls/rake/task'
-
-  Coveralls::RakeTask.new
-
-  namespace :ci  do
-    desc 'Run all tests and generate a merged coverage report'
-    task tests:  [:spec, 'coveralls:push']
-  end
-end
-```
-
-Now on you can run the following command on CI to execute all your tests suites
-```
-$ bundle exec rails ci:tests
-```
-At this point, you have added the code necessary to make coveralls work.
-
-Now you need to visit the [Coveralls website](https://coveralls.io/) and add your project to use their service.
-
-If you haven’t created an account already, please sign up using your Github account.
-
-
-![](https://www.filepicker.io/api/file/x2i78OolTumUoKXDckEA)
-
-Once you are logged in you need to get to the page where you can add new repositories. Go to the sidebar and click on “Add repos”
-
-![](https://www.filepicker.io/api/file/738t6RhOQVyk5BSmP8du)
-
-The first thing that you want to do is to click on the sync repos button in the top right corner.  
-
-![](https://www.filepicker.io/api/file/bxBAQKR9pANnx8DInXAs)
-
-Now you can search for the repository that you want to add “Coveralls” to. When you find it you need to enable it.
-
-![](https://www.filepicker.io/api/file/sURTnZLHSsmVJlNADFso)
-
-At this point, we have successfully added coveralls to our project.  
-If you need to have the coveralls token for continuous integration (Semaphore), click on the Details button.
-
-If you recently added coveralls to the repository you will be presented by the coveralls  `repo_token`  straight away. If you don’t see it when you press details. Then you have to go to the settings for this project to find the coveralls  `repo_token`.  
-
-![](https://www.filepicker.io/api/file/8OFw0T2uT0aHm1KiV2tM)
-
-![](https://www.filepicker.io/api/file/FXPGZifRdyPONkPf4PAR)
 
 # Setting up Continous integration with Semaphore
 At this stage we need to set up CI for both the client and the api.
