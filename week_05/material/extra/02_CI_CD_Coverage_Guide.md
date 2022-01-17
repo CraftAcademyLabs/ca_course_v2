@@ -47,47 +47,53 @@ At this stage we need to set up CI for both the client and the api.
 
 Visit the Semaphore's [website](https://semaphoreci.com/). 
 
-![](../../../week_04/material/images/semaphore_landing_page.png)
+![](../../../week_05/material/images/semaphore_landing_page.png)
 
 If you don't already have an account, set one up with Github
 
-While signing up you might be blocked by an 'abusive-filter'. If this is the case, you'll have to send a mail to that specified address in the error message. Make sure to include your GitHub email in that message!   
+When signing up you might be blocked by an 'abusive-filter'. If this is the case, you'll have to send a mail to that specified address in the error message. Make sure to include your GitHub email in that message!   
 
 ### Setting up a new project
 - Click the "Create new" button and then "Choose repository".
 
 ![](../../../week_04/material/images/semaphore_dashboard.png)
 
-- At this stage you should have been prompted to give Semaphore access to your GitHub account. If by some reason you still don't see any repos, go to your profile settings up in the right corner and check permissions. If your Public repos are indeed connected, but you still don't see anything - contact a coach!
+- At this stage you should have been prompted to give Semaphore access to your GitHub account. If by some reason you still don't see any repos, go to your profile settings up in the right corner and check permissions. Make sure to check both in "GitHub App" and "Github Personal Token". If your Public repos are indeed connected, but you still don't see anything - contact a coach!
 - Proceed to select the repo you want to use.
 
-![](../../../week_04/material/images/semaphore_choose_repo.png)
+![](../images/semaphore_choose_repo.png)
+
+- Semaphore will ask you if you want to add people to the project. Don't worry if not everyone on your team is signed up, this can be done at a later stage.
+
+![](../images/semaphore_add_people.png)
 
 ### Workflow
 
-- Now we need to configure the test environment. Choose the "Ruby on Rails" starter workflow and then click "Looks good, start". 
-- Semaphore has issues when we click Customize before the workflow has been run the first time, so use this flow even if you know you want to customize the configurations.
+- Now we need to configure the test environment. Choose the "Ruby on Rails" starter workflow and then click "Customize".
 
-![](../../../week_04/material/images/semaphore_workflow.png)
+![](../images/semaphore_workflow.png)
 
-- This will start the testing automatically, but we need to tweak the config a bit, so stop the test and click "Edit Workflow"
+- We are interested in editing the "jobs" part first to suit our project.
 
-![](../../../week_04/material/images/semaphore_edit.png)
+![](../images/semaphore_customize.png)
 
-Inside the Jobs container, replace the content with this:
+Inside the this container, replace the content with this:
 
 ```
 checkout
 sem-service start postgres 11
 sem-version ruby 3.0.0
-cache restore
-bundle install --deployment --path vendor/bundle
-cache store
-bundle exec rake db:setup
-COVERALLS_REPO_TOKEN=your_coveralls_token bundle exec rails ci:tests
+curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+chmod +x ./cc-test-reporter
+./cc-test-reporter before-build
+bundle update --bundler
+bundle install
+bundle exec rails db:create db:migrate
+bundle exec rspec
 ```
+Wow that's a lot! Let's go through it to make sure we know what Semaphore will do. The first three lines tell Semaphore what version of Postgres and Ruby to use. If your project uses a different version than 3.0.0 go ahead and change it, but leave Postgres as version 11. The following four lines come from the CodeClimate [documentation](https://docs.codeclimate.com/docs/semaphore-ci-test-coverage-example) and ensures CodeClimate can read the coverage report that `Simplecov` spits out. The final four lines should look familiar at this point. They update `Bundler` to the latest version, installs all the Gems in your `Gemfile` and create the database (NB: We do not need to seed the database for test coverage, that is why we're not running `rails db:setup`). Finally it tells Semaphore to run `rspec`.
 
-Change `sem-version ruby` to your local ruby version and replace the coveralls placeholder with your token.
+But we're not quite done. We need to edist the "Epilogue" and "Environment variables".
 
 Now "Run this workflow" which should initiate a new test run. If you have any strange errors here, contact a coach.
 
