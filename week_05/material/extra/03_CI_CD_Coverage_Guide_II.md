@@ -5,11 +5,13 @@ ___
 Just as for Rails, we will use **Semaphore** and **Code Climate**. But as you've probable already guessed, we need to adjust the commands we make Semaphore execute. The **Code Climate** implementation is identical to the last guide, so go ahead and add your React repo and save the `CC_TEST_REPORTER_ID`
 ___
 
-Go to Semaphore and create new project
+Head over to **Semaphore** and create a new project, just the same as when you set one up for your Rails backend. Once you've selected the repo and added people you want to set up your workflow. Select the Node.js template, as it's the closest to what we want to do:
+![](../images/semaphore_workflow_react.png)
+You guessed it, we have to edit the jobs section:
+![](../images/semaphore_workflow_dashboard_react.png)
 
-Choose Node.js, closest to what we want to do
 
-Customize the job tasks: 
+Edit it as follows: 
 ```
 sem-version node 16.13.2
 checkout
@@ -19,26 +21,24 @@ chmod +x ./cc-test-reporter
 yarn install
 yarn cypress:ci
 ```
-Epilogue
+Change the `Epilogue` to this:
 ```
 ./cc-test-reporter format-coverage -t lcov
 ```
-Job passed
+Then the `job passed` to:
 ```
 ./cc-test-reporter after-build --exit-code 0
 ```
-Job failed
+And the `job failed` to:
 ```
 ./cc-test-reporter after-build --exit-code 1
 ```
-Environment variables, note that there is only one this time around, can you think of a reason why?
+Now look at the environment variables. This time around we only need one, `CC_TEST_REPORTER_ID`, and just like before you get it from **Code Climate**, though make sure that you get it from the frontend repo project on Code Climate!
 
+Now we want to run the workflow. Edit the branch name to `development` if that is what you are using on your github. Go ahead and start it:
+![](../images/semaphore_run_workflow_react.png)
 
-Create new branch (this needs to match what you are calling yr repo on GH)
-
-Run job on Semaphore
-
-If all good, open a PR to see that it runs
+Now this will of course fail. This is because we have issued a bunch of commands on Semaphore that are not yet integrated with our app. Let's fix that next!
 
 ___
 
