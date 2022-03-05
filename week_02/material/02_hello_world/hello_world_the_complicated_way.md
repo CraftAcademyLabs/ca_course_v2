@@ -1,4 +1,3 @@
-
 # A Hello World with a goal
 
 React is a popular JavaScript library for building user interfaces. It was created by developers at Facebook and has quickly become very popular among developers. One way to look at React is that it is the view layer for web applications (the V in Model - View - Controller), but it is much more than that. There are several concepts that React introduces that drastically changes the way you approach building web applications and user interfaces.
@@ -46,7 +45,31 @@ hello_world
 ```
 We also want to create a starting point for our application. We need an `index.html` file (in the project's root folder) that will be loaded in the browser and hold our React application.
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/fDVijGfnTXWZH1qHyh7w)
+~~~~~{.html .numberLines}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="withth=device-width, initial-scale=1, shrink-to-fit-no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src *; connect-src * ws://*; wss://*; style-src * 'unsafe-inline' 'unsafe-eval'; media-src * ; img-src * data:; font-src * ; script-src * 'unsafe-inline' 'unsafe-eval';"
+    />
+    <title>Portfolio</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <noscript>
+      You need to enable JavaScript to run this React application.
+    </noscript>
+    <script src="dist/bundle.js"></script>
+  </body>
+</html>
+~~~~~~
 
 The most important part of the code above is the `<div id="app"></div>` tag, which is the root our React application will hook into, but also the `script` reference to `dist/bundle.js` that will hold our compiled code. The rest is pretty much a standard HTML skeleton.
 
@@ -86,16 +109,26 @@ All in all, we need to install Babel. Let's break it down a bit more.
 
 `@babel-core` is the main Babel package used to do any transformations on our code. `@babel-cli` lets you compile files from the command line. The other two packages,`@preset-react` and `@preset-env`, are presets that transform specific flavors of code. The `@preset-env` preset transpiles ES6 into more traditional JavaScript (ES5) and the `@preset-react` preset does the same with JSX.
 
-We need to tell Babel that we want to use those presets. In the project's root folder, create a file called `.babelrc` and add the following setting in Json:
+We need to tell Babel that we want to use those presets. In the project's root folder, create a file called `.babelrc` and add the following setting in JSON format:
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/bR8qh3E7S7KxC0UW5dMJ)
+
+
 
 ### Execution
+
 ```bash
 $ yarn add -D @babel/core @babel/cli @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties uglifyjs-webpack-plugin
 $ touch .babelrc
-// add the json code to .babelrc
+// add the json code below to .babelrc
 ```
+
+~~~~~{.javascript .numberLines}
+{
+  "presets": ["@babel/env", "@babel/preset-react"],
+  "plugins": ["@babel/plugin-proposal-class-properties"]
+}
+~~~~~
+
 _Please note that you might get Security Warnings/Alerts if you push to GitHub. Don't stress and follow the instructions. At the time we wrote this walkthrough, the fix was to install the following packages:_
 
 ```bash
@@ -109,22 +142,70 @@ Webpack uses loaders to process different types of files for bundling. It also w
 
 To get all of this up and running, we need to configure Webpack to use our loaders and prepare the development server (`webpack-dev-server`). The following is a working setup for the `webpack.config.js` - a file you need to create in the project's root folder.
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/MP32ILR6Sqid6Q3tU1PC)
+~~~~~{.javascript .numberLines}
+const path = require("path");
+const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+module.exports = {
+  entry: "./src/index.js",
+  mode: "development",
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules)/,
+        loader: "babel-loader",
+        options: { presets: ["@babel/env"] },
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+  resolve: { extensions: ["*", ".js", ".jsx"] },
+  output: {
+    path: path.resolve(__dirname, "dist/"),
+    publicPath: "/dist/",
+    filename: "bundle.js",
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "/"),
+    port: 3000,
+    publicPath: "http://localhost:3000/dist/",
+    watchContentBase: true,
+    historyApiFallback: true,
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          mangle: {
+            keep_fnames: true,
+          },
+        },
+      }),
+    ],
+  },
+
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+};
+~~~~~
 
 There are many parts here that call for a closer look. Do not take this lightly.
 
--   `entry` tells Webpack where our application starts and where to bundle our files.
--   `mode` lets Webpack know we’re working in development mode and saves us from having to add a mode flag when we run the development server.
--   `module` is an object that defines how our exported javascript modules are transformed and which ones are included according to the given array of `rules`.
--   The first rule is about transforming ES6 and JSX syntax. The `test` and `exclude` properties are conditions to match files against. We will match anything that is NOT inside the `node_modules` folder. We also need to direct Webpack to use Babel.
--   The second rule configures how we will process CSS. At this point, we will not pre- or post-process our CSS. Meaning we just need to make sure to add `style-loader` and `css-loader` to the `use` property. Later on, we will take a closer look at SASS and will have to change these settings.
--   `resolve` allows us to specify which extensions Webpack will resolve — this allows us to import modules without needing to add their extensions.
--   `output` property tells Webpack where to put our transpiled and bundled code. The `publicPath` property specifies what directory the bundle should go in, and tells `webpack-dev-server` were to serve files from. If `publicPath` is set incorrectly, we would be getting 404 errors when running the app, since the server would not be serving your files from the correct folder.
--   `devServer` property configures the `webpack-dev-server` and specifies the location we will be used to serve static files from as well as the port we want to run the server on.
+-   **`entry`** tells Webpack where our application starts and where to bundle our files.
+-   **`mode`** lets Webpack know we’re working in development mode and saves us from having to add a mode flag when we run the development server.
+-   **`module`** is an object that defines how our exported javascript modules are transformed and which ones are included according to the given array of `rules`.
+-   The first rule is about transforming ES6 and JSX syntax. The **`test`** and **`exclude`** properties are conditions to match files against. We will match anything that is NOT inside the **`node_modules`** folder. We also need to direct Webpack to use Babel.
+-   The second rule configures how we will process CSS. At this point, we will not pre- or post-process our CSS. Meaning we just need to make sure to add **`style-loader`** and **`css-loader`** to the **`use`** property. Later on, we will take a closer look at SASS and will have to change these settings.
+-   **`resolve`** allows us to specify which extensions Webpack will resolve — this allows us to import modules without needing to add their extensions.
+-   **`output`** property tells Webpack where to put our transpiled and bundled code. The **`publicPath`** property specifies what directory the bundle should go in, and tells `webpack-dev-server` were to serve files from. If `publicPath` is set incorrectly, we would be getting 404 errors when running the app, since the server would not be serving your files from the correct folder.
+-   **`devServer`** property configures the **`webpack-dev-server`** and specifies the location we will be used to serve static files from as well as the port we want to run the server on.
 
 We also need to add a script to `package.json` to start the `webpack-dev-server`:
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/oY3GEeBBRO2M0AhTUFpQ)
 
 ### Execution
 
@@ -132,8 +213,15 @@ We also need to add a script to `package.json` to start the `webpack-dev-server`
 $ yarn add -D webpack@4.19.1 webpack-cli@3.1.1 webpack-dev-server@3.1.8 style-loader@0.23.0 css-loader@1.0.0 babel-loader@8.0.2
 $ touch webpack.config.js
 // add the javascript code to webpack.config.js
-// add the json code to package.json
+// add the json code below to package.json
 ```
+
+~~~~~{.javascript .numberLines}
+  "scripts": {
+    "start": "webpack-dev-server --inline --mode development --open"
+  },
+~~~~~
+
 ## Our first component - Hello World
 
 Let's create an `index.js` file in our `src` directory, build our first component and hook it in into the DOM.
@@ -159,11 +247,11 @@ Let's extract the Hello tag into a reusable component.
 
 Let's create a new file in the `src` folder and call it `Hello.jsx`. I that file we will create out `Hello` component and reference it from `index.js`. This is the code we need to write:
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/D4dDTWNQwylzIDKuEDRF)
+![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/D4dDTWNQwylzIDKuEDRF){width=90%}
 
 Consequently, we need to make some changes to the `index.js`. Read through the following code first, to make sure you understand what's going on, and replace the current content of `index.js`.
 
-![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/wsVmo8xOTguMBmglKbuA)
+![](https://cdn.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:2500/https://www.filepicker.io/api/file/wsVmo8xOTguMBmglKbuA){width=90%}
 
 ## Summary
 
