@@ -1,164 +1,135 @@
-The following guide assumes that you have an upstream repository on Craft Academy's Github account, if that is not the case for you then just ignore the parts about adding the "Craft Academy repository" and set your repository there instead. It also assumes that you're using Rpsec for testing Ruby on Rails and Cypress for a React client
+The following guide assumes that you have an upstream repository on Craft Academy's Github account, if that is not the case for you then just ignore the parts about adding the "Craft Academy repository" and set your repository there instead. It also assumes that you're using RSpec for testing Ruby on Rails and Cypress for a React client.
 
-In this guide, we will show you how to set up three services that will work together, Semaphore, CD with Heroku and Coveralls.
+In this guide, we will show you how to set up three services that will work together, Semaphore, CD with Heroku and Code Climate.
 
-**Semaphore** is testing your code all the time and keeping software quality high. The premise of CI is to get feedback as early as possible because the earlier you get feedback, the fewer things cost to fix.
+**Semaphore** is testing your code all the time and keeping software quality high. The premise of CI is to get feedback as early as possible because the earlier you get feedback, the easier things become to fix.
 
-In software development, when multiple developers or teams are working on different segments of the same web application, we need to perform an integration test by integrating all modules. To do that an automated process for each piece of code is performed on a daily bases so that all your code gets tested.
+In software development, when multiple developers or teams are working on different segments of the same web application, we need to perform an integration test by integrating all modules. To do that an automated process for each piece of code is performed on a daily basis so that all your code gets tested.
 
 **Continuous Deployment with Heroku** is about getting code into production in an automated way. Things should be easy and repeatable. That’s where Continuous Deployment comes into play. The deployment should not be manual. Every time we add some new code to our application it should deploy that new code automatically.
 
-**Coveralls** is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered. You can use it for various programming languages and in this guide, we will use it for Ruby.
+**CodeClimate** is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered. You can use it for various programming languages and in this guide, we will use it for Ruby. In a later guide we will use it to measure code coverage in React.
 
-# Coverage with Coveralls
-Add the following gem to your `Gemfile` in the `:development` and `:test` group
+# Coverage with Code Climate
+Code Climate can automatically track your coverage, but it relies on separate tools to do the actual analysis of how much of your code is being tested. Add the following gem to your `Gemfile` in the `:development` and `:test` group
 
 ```rb
 group :development,  :test  do
-  gem 'coveralls',  require:  false
+  gem 'simplecov',  require:  false
 end
 ```
 
 ``Run bundle install``
 
-Next, we need to add coveralls to our testing suite. Add the following lines at the top of the `rspec` configuration file
+Next, we need to add simplecov to our testing suite. Add the following lines at the top of the `rspec` configuration file
 
 ```rb
 # spec/rails_helper.rb for RSpec
 
-require  'coveralls'
-Coveralls.wear!('rails')
+require  'simplecov'
+SimpleCov.start
 ```
 
-Now whenever we run our tests, a coverage report will be generated.
+Now whenever we run our tests, a coverage report will be generated. *NB: Do not track this report in version control! You will need to add the following to your gitignore:*
+```
+# .gitignore
 
+coverage/
+```
+Now let's head over to [Code Climate](https://codeclimate.com/) and set up a free account. Code Climate offers two services, Velocity and Quality. We are interested in the latter:
+![](../images/codeclimate_landing_page.png)
+Don't bother with the 14 day trial, open source is where it's at (you may need to give access to the specific repository you want to work with, if you run into trouble contact a coach):
+
+![](../images/codeclimate_welcome.png)
+
+Let's add the repo we are working with:
+![](../images/codeclimate_dashboard.png)
+All the repos you have access to should appear as follows:
+![](../images/codeclimate_repos.png)
+After selecting your repo, Code Climate will work through it and hopefull display something in line with the following:
+![](../images/codeclimate_success.png)
+If you navigate to your repo will be served with an overview. Our goal is to populate the "test coverage" with a percentage. Our first step on this journey is to head over to the "Repo Settings":
+![](../images/codeclimate_settings.png)
+In "Repo Settings" head over to "Test Coverage":
+![](../images/codeclimate_repo_settings.png)
+Scroll down and copy the `Test Reported ID`, you will need it later on:
+![](../images/codeclimate_test_reporter_id.png)
 ----------
 
-### Merging multiple test suites results
-
-We need to prevent coveralls from sending data right after running each test.
-
-Instead, we want to wait until coverage has been merged before we send it off.
-
-For that, we’ll modify the configuration with the following
-
-instead of
-```
-Coveralls.wear!('rails')
-```
-we should use
-```
-Coveralls.wear_merged!('rails')
-```
-When you run your tests coveralls will create coverage reports in folder named `coverage`. We do not want to push that up to Github. Make sure you add `coverage/` to your `.gitignore`
-
-Then create a custom rake task that will run all your test suites then submit coverage results to coveralls.
-
-Create a new file `lib/tasks/ci.rake`
-
-```rb
-unless  Rails.env.production?
-  require  'rspec/core/rake_task'
-  require  'coveralls/rake/task'
-
-  Coveralls::RakeTask.new
-
-  namespace :ci  do
-    desc 'Run all tests and generate a merged coverage report'
-    task tests:  [:spec, 'coveralls:push']
-  end
-end
-```
-
-Now on you can run the following command on CI to execute all your tests suites
-```
-$ bundle exec rails ci:tests
-```
-At this point, you have added the code necessary to make coveralls work.
-
-Now you need to visit the [Coveralls website](https://coveralls.io/) and add your project to use their service.
-
-If you haven’t created an account already, please sign up using your Github account.
-
-
-![](https://www.filepicker.io/api/file/x2i78OolTumUoKXDckEA)
-
-Once you are logged in you need to get to the page where you can add new repositories. Go to the sidebar and click on “Add repos”
-
-![](https://www.filepicker.io/api/file/738t6RhOQVyk5BSmP8du)
-
-The first thing that you want to do is to click on the sync repos button in the top right corner.  
-
-![](https://www.filepicker.io/api/file/bxBAQKR9pANnx8DInXAs)
-
-Now you can search for the repository that you want to add “Coveralls” to. When you find it you need to enable it.
-
-![](https://www.filepicker.io/api/file/sURTnZLHSsmVJlNADFso)
-
-At this point, we have successfully added coveralls to our project.  
-If you need to have the coveralls token for continuous integration (Semaphore), click on the Details button.
-
-If you recently added coveralls to the repository you will be presented by the coveralls  `repo_token`  straight away. If you don’t see it when you press details. Then you have to go to the settings for this project to find the coveralls  `repo_token`.  
-
-![](https://www.filepicker.io/api/file/8OFw0T2uT0aHm1KiV2tM)
-
-![](https://www.filepicker.io/api/file/FXPGZifRdyPONkPf4PAR)
-
 # Setting up Continous integration with Semaphore
-At this stage we need to set up CI for both the client and the api.
-## For the API
+With the Code Climate Test Reported Id in our back pocker, we need to set up CI using SemaphoreCI
 
 Visit the Semaphore's [website](https://semaphoreci.com/). 
 
-![](../../../week_04/material/images/semaphore_landing_page.png)
+![](../../../week_05/material/images/semaphore_landing_page.png)
 
 If you don't already have an account, set one up with Github
 
-While signing up you might be blocked by an 'abusive-filter'. If this is the case, you'll have to send a mail to that specified address in the error message. Make sure to include your GitHub email in that message!   
+When signing up you might be blocked by an 'abusive-filter'. If this is the case, you'll have to send a mail to that specified address in the error message. Make sure to include your GitHub email in that message!   
 
 ### Setting up a new project
 - Click the "Create new" button and then "Choose repository".
 
 ![](../../../week_04/material/images/semaphore_dashboard.png)
 
-- At this stage you should have been prompted to give Semaphore access to your GitHub account. If by some reason you still don't see any repos, go to your profile settings up in the right corner and check permissions. If your Public repos are indeed connected, but you still don't see anything - contact a coach!
+- At this stage you should have been prompted to give Semaphore access to your GitHub account. If by some reason you still don't see any repos, go to your profile settings up in the right corner and check permissions. Make sure to check both in "GitHub App" and "Github Personal Token". If your Public repos are indeed connected, but you still don't see anything - contact a coach!
 - Proceed to select the repo you want to use.
 
-![](../../../week_04/material/images/semaphore_choose_repo.png)
+![](../images/semaphore_choose_repo.png)
+
+- Semaphore will ask you if you want to add people to the project. Don't worry if not everyone on your team is signed up, this can be done at a later stage.
+
+![](../images/semaphore_add_people.png)
 
 ### Workflow
 
-- Now we need to configure the test environment. Choose the "Ruby on Rails" starter workflow and then click "Looks good, start". 
-- Semaphore has issues when we click Customize before the workflow has been run the first time, so use this flow even if you know you want to customize the configurations.
+- Now we need to configure the test environment. Choose the "Ruby on Rails" starter workflow and then click "Customize".
 
-![](../../../week_04/material/images/semaphore_workflow.png)
+![](../images/semaphore_workflow.png)
 
-- This will start the testing automatically, but we need to tweak the config a bit, so stop the test and click "Edit Workflow"
+- We are interested in editing the "jobs" part first to suit our project.
 
-![](../../../week_04/material/images/semaphore_edit.png)
+![](../images/semaphore_customize.png)
 
-Inside the Jobs container, replace the content with this:
+Inside the this container, replace the content with this:
 
 ```
 checkout
 sem-service start postgres 11
 sem-version ruby 3.0.0
-cache restore
-bundle install --deployment --path vendor/bundle
-cache store
-bundle exec rake db:setup
-COVERALLS_REPO_TOKEN=your_coveralls_token bundle exec rails ci:tests
+curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+chmod +x ./cc-test-reporter
+./cc-test-reporter before-build
+bundle update --bundler
+bundle install
+bundle exec rails db:create db:migrate
+bundle exec rspec
 ```
+Wow that's a lot! Let's go through it to make sure we know what Semaphore will do. The first three lines tell Semaphore what version of Postgres and Ruby to use. If your project uses a different version than 3.0.0 go ahead and change it, but leave Postgres as version 11. The following four lines come from the CodeClimate [documentation](https://docs.codeclimate.com/docs/semaphore-ci-test-coverage-example) and ensures CodeClimate can read the coverage report that `Simplecov` spits out. The final four lines should look familiar at this point. They update `Bundler` to the latest version, installs all the Gems in your `Gemfile` and create the database (NB: We do not need to seed the database for test coverage, that is why we're not running `rails db:setup`). Finally it tells Semaphore to run `rspec`.
 
-Change `sem-version ruby` to your local ruby version and replace the coveralls placeholder with your token.
+But we're not quite done. We need to edit the "Epilogue" and "Environment variables" before we run anything. Let's start with the epilogue.
+![](../images/semaphore_epilogue.png)
+In "Execute always" we want:
+```
+./cc-test-reporter format-coverage -t simplecov -o  coverage/.resultset.json
+```
+In "If job has passed" we want:
+```
+./cc-test-reporter after-build --exit-code 0
+```
+In "If job has failed" we want:
+```
+./cc-test-reporter after-build --exit-code 1
+```
+Great! Now let's look at the environment variables.
+![](../images/semaphore_env_var.png)
+`DATABASE_URL` and `RAILS_ENV` were generated by Semaphore's Ruby on Rails template, there is no need to change them. Instead we're going to add a third variable: `CC_TEST_REPORTER_ID`. Do you remember the Code Climate setup we did above? You guessed it, this variable should be set to the "Test Reporter ID" provided to us by Code Climate.
 
-Now "Run this workflow" which should initiate a new test run. If you have any strange errors here, contact a coach.
-
-![](../../../week_04/material/images/semaphore_new_settings.png)
+Now "Run this workflow" which should initiate a new test run. If you have any strange errors here, contact a coach. You will probably have to rename the branch that the build is happening from to `development` or whatever you've called your development branch on Github.
 
 - And voila!
 
-![](../../../week_04/material/images/semaphore_successful.png)
+![](../images/semaphore_success.png)
 
 This process will create a PR to the chosen repo. Make sure to get this PR merged (by you or the coaches) and then pull down to your local project to make sure the new ``semaphore.yml`` file will be added in future PRs.
 
@@ -166,37 +137,8 @@ Now, as the final thing, head over to the project's settings tab, scroll down an
 
 ![](../../../week_04/material/images/semaphore_PR.png)
 
-## For the client
-The config looks a bit different for the client. 
-
-To start with we need to create a script for Semaphore to utilize. In your local app, go to `package.json` and add the following scripts:
-
-```js
-"cy:run": "cypress run",
-"cy:integrate": "start-server-and-test start:silent http://localhost:3001/ cy:run",
-```
-Make sure this is pushed up to the repo before you proceed.
-
-### Workflow for Cypress
-We'll also be using a different workflow for the client. 
-
-- In the box to the left, search for `yarn` or scroll all the way to the bottom. 
-
-- Select this starter workflow and click "Looks good, start".
-
-![](../images/semaphore_client_workflow.png)
-
-- Once again we click "stop pipeline" and "Edit Workflow". In the Jobs container, we change the content to this:
-```
-sem-version node 12
-checkout
-yarn install
-yarn cy:integrate
-```
-
-![](../images/semaphore_client_config.png)
-
-Remember to change the build settings for pull requests - and that should do it for the client! 
+As a sanity check, head over to Code Academy and if all's gone well you should be seeing your code coverage (try to figure out how to grab a badge of your coverage and add it to your github's `README.md`):
+![](../images/codeclimate_coverage.png)
 
 # Setting up Continous Deployment with Heroku
 
@@ -210,16 +152,11 @@ Remember to change the build settings for pull requests - and that should do it 
 
 ![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/11_heroku-deployment-method.png)
 
-- Now you need to decide which branch you want to be deployed, pick the master branch
+- Now you need to decide which branch you want to be deployed, pick the main branch
 
 - Now click the button that says "Enable Automatic Deploys"
 
 ![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/12_heroku-automatic-deploys.png)
 ![](https://raw.githubusercontent.com/CraftAcademyLabs/ca_course/master/guides/coveralls-ci-cd/assets/13_heroku-auto-deploy-enabled.png)
-
-# Setting up Continous Deployment with Netlify
-Setting up Netlify should be a breeze for you at this point - just remember to rewrite your `build` script with this line when you're implementing different routes:
-
-`"build": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects",`
 
 **DONE!!**
