@@ -21,4 +21,23 @@ That will do for our purposes, but keep in mind that many of the steps below wil
 
 ### Writing our test
 
-Before we go running off looking for a Stripe React dependency we need to first write a test. Let's call it `userCanSeeArticleBySubscribing.feature.js`. 
+Before we go running off looking for a Stripe React dependency we need to first write a test. Let's call it `userCanSeeArticleBySubscribing.feature.js`:
+
+```
+touch cypress/integration/userCanSeeArticleBySubscribing.feature.js
+```
+
+As you can tell by the above diagram, we have to intercept quite a few api calls. Add the following to a `beforeEach` block:
+
+```js
+cy.intercept("POST", "https://r.stripe.com/0", { statusCode: 201 });
+```
+This will stub out the call that goes to Stripe's own platform and return a 201 status code. Followed by a:
+
+```js
+cy.intercept("POST", "api/subscriptions", {
+      statusCode: 201,
+      body: { paid: true },
+    });
+```
+As you can tell we do not need to bother with a fixture file here. The only thing we care about is that our API returns an HTTP response which includes an object in its body with a key of `paid` set to `true`. Now if we set `paid` to `true`, you can probably guess that we will only deal with the happy path here, i.e. that the payment was accepted.
