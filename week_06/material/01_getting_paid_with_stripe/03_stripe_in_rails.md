@@ -110,7 +110,7 @@ require 'stripe_mock'
 RSpec.describe 'GET /api/donations', type: :request do
   describe 'successfully' do
     before(:each) { StripeMock.start }
-  after(:each) { StripeMock.stop }
+    after(:each) { StripeMock.stop }
     let!(:registered_user) { create(:user) }
     let!(:user_headers) { registered_user.create_new_auth_token }
     before do
